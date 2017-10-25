@@ -24,7 +24,7 @@
 		// Run it
 		$tmp = shell_exec($command);
 		// Output
-		if ($command !== "echo $PWD" && $command !== "whoami") {
+		if ($command !== 'echo $PWD' && $command !== 'whoami') {
 		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
 		$output .= htmlentities(trim($tmp)) . "\n";
 		}
@@ -46,7 +46,7 @@
  |___==___|  /              &copy; oodavid 2012 |
               |____________________________|
 
-<?php echo $output; ?>
+<?php // echo $output; ?>
 </pre>
 </body>
 </html>
