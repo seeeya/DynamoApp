@@ -29,7 +29,7 @@ echo "Files in this folder: <br>";
 foreach ($files1 as $value) {
 	if($value != ".") {
 		if($value != "..") {	
-		if($value != "index.php" && $value !== "deploy.php"){
+		if($value != "index.php" && $value !== "deploy.php" && $value !== ".git"){
 			 echo "<a href='$value'>$value</a> <br />\n";
 		}
 		}
