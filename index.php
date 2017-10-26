@@ -13,11 +13,7 @@
 
   gtag('config', 'UA-108664137-1');
 </script>
-  
-   
-  
 </head>
- 
 <body id="index" class="home">
 <?php
 $dir    = './';
@@ -37,6 +33,5 @@ foreach ($files1 as $value) {
 }
 
 ?>
-
 </body>
 </html>
