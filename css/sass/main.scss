@@ -7,3 +7,12 @@ this file is for main css
 h1 {
 color:$red;
 }
+.example {
+height:150px;
+width:150px;
+background:red;
+border-radius:100%;
+	h1 {
+	color:$blue;
+	}
+}
