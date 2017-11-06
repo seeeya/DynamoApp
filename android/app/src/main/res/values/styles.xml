@@ -2,11 +2,11 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorAccent">@color/orange</item>
-        <item name="colorPrimary">@color/orange</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/violet</item>
-        <item name="android:colorAccent" tools:targetApi="21">@color/orange</item>
-        <item name="android:colorPrimary" tools:targetApi="21">@color/orange</item>
+        <item name="android:colorAccent" tools:targetApi="21">@color/blue</item>
+        <item name="android:colorPrimary" tools:targetApi="21">@color/blue</item>
         <item name="android:colorPrimaryDark" tools:targetApi="21">@color/violet</item>
     </style>
 

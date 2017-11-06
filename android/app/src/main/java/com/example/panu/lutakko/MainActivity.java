@@ -9,9 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import io.proximi.proximiiolibrary.ProximiioAPI;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Toolbar toolbar;
     private Marker marker;
 
-    private static final String TAG = "ProximiioDemo";
+    private static final String TAG = "Lutakko Lunch";
 
     public static final String AUTH = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImlzcyI6ImRiMDRhNjMyLWM2OTgtNDYwMC04ZDc4LWM0YTczYTFkZGI3MCIsInR5cGUiOiJhcHBsaWNhdGlvbiIsImFwcGxpY2F0aW9uX2lkIjoiMjkwM2JmNmEtMzA5NS00MDcxLTlkODktM2MzOTU0MjMwNDViIn0.2jU0sheug_ge8WiwA10fHIZViaWlAwnBzsRGGHhTSBA"; // TODO: Replace with your own!
     @Override
@@ -40,12 +43,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         proximiioAPI.setListener(new ProximiioListener() {
             @Override
             public void geofenceEnter(ProximiioGeofence geofence) {
-                Log.d(TAG, "Geofence enter: " + geofence.getName());
+                toolbar = (Toolbar) findViewById(R.id.toolbar);
+                toolbar.setTitle("Geofence enter: " + geofence.getName());
+                //Log.d(TAG, "Geofence enter: " + geofence.getName());
             }
 
             @Override
             public void geofenceExit(ProximiioGeofence geofence, @Nullable Long dwellTime) {
-                Log.d(TAG, "Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
+                toolbar = (Toolbar) findViewById(R.id.toolbar);
+                toolbar.setTitle("Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
+                //Log.d(TAG, "Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
             }
 
             @Override
@@ -92,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         proximiioAPI.destroy();
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -109,21 +118,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mapHelper = new ProximiioGoogleMapHelper.Builder(this, googleMap)
                 .showGeofenceMarkers(false)
+                .positioning(false)
                 .listener(new ProximiioGoogleMapHelper.Listener() {
                     @Override
                     public void changedFloor(@Nullable ProximiioFloor floor) {
-                        toolbar.setTitle(floor != null ? floor.getName() : TAG);
+
                     }
                 }).build();
+        LatLng lutakko = new LatLng(62.241137, 25.759345);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lutakko, 17));
 
         googleMap.setOnMyLocationButtonClickListener(mapHelper);
         googleMap.setOnMapClickListener(mapHelper);
         googleMap.setOnCameraIdleListener(mapHelper);
+        googleMap.setMyLocationEnabled(true);
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                marker.setTitle("This is an example place");
-                marker.setSnippet("Click to learn more!");
+                if ("mint".equals(marker.getTitle())) {
+                    marker.setTitle("This is an example place");
+                    marker.setSnippet("Click to learn more!");
+                }
                 return false;
             }
         });
@@ -137,7 +152,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intent);
             }
         });
+        googleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
+            @Override
+            public void onInfoWindowLongClick(Marker marker) {
+                //directions to marker?
+            }
+        });
 
     }
+
 
 }
