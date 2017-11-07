@@ -16,6 +16,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioFloor;
@@ -28,7 +32,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ProximiioAPI proximiioAPI;
     @Nullable private ProximiioGoogleMapHelper mapHelper;
     private Toolbar toolbar;
-    private Marker marker;
+    List<Marker> markers = new ArrayList<Marker>();
+    private Marker mDynamo;
+    private Marker mFiilu;
+    private Marker mBest;
+    private int arrayindex = 0;
+    private static final LatLng Dynamo = new LatLng(62.241704, 25.759495);
+    private static final LatLng Fiilu = new LatLng(62.240799, 25.757682);
+    private static final LatLng Best = new LatLng(62.241710, 25.761445);
+    private GoogleMap gMap;
+
+
 
     private static final String TAG = "Lutakko Lunch";
 
@@ -44,14 +58,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void geofenceEnter(ProximiioGeofence geofence) {
                 toolbar = (Toolbar) findViewById(R.id.toolbar);
-                toolbar.setTitle("Geofence enter: " + geofence.getName());
+                toolbar.setTitle("Enter: " + geofence.getName());
                 //Log.d(TAG, "Geofence enter: " + geofence.getName());
             }
 
             @Override
             public void geofenceExit(ProximiioGeofence geofence, @Nullable Long dwellTime) {
                 toolbar = (Toolbar) findViewById(R.id.toolbar);
-                toolbar.setTitle("Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
+                toolbar.setTitle("Exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
                 //Log.d(TAG, "Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
             }
 
@@ -63,21 +77,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         proximiioAPI.setAuth(AUTH);
         proximiioAPI.setActivity(this);
 
-        // Set toolbar buttons to change the current floor up and down
         findViewById(R.id.floorUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mapHelper != null) {
-                    mapHelper.floorUp();
-                }
-            }
-        });
-        findViewById(R.id.floorDown).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mapHelper != null) {
-                    mapHelper.floorDown();
-                }
+                boolean up = true;
+                moveCamera(up);
             }
         });
 
@@ -116,17 +120,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // Called when the map is ready to use
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
         mapHelper = new ProximiioGoogleMapHelper.Builder(this, googleMap)
-                .showGeofenceMarkers(false)
                 .positioning(false)
+                .showGeofenceMarkers(false)
+                .showInputMarkers(false)
                 .listener(new ProximiioGoogleMapHelper.Listener() {
-                    @Override
-                    public void changedFloor(@Nullable ProximiioFloor floor) {
 
-                    }
                 }).build();
         LatLng lutakko = new LatLng(62.241137, 25.759345);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lutakko, 17));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lutakko, 15));
 
         googleMap.setOnMyLocationButtonClickListener(mapHelper);
         googleMap.setOnMapClickListener(mapHelper);
@@ -135,10 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                if ("mint".equals(marker.getTitle())) {
-                    marker.setTitle("This is an example place");
-                    marker.setSnippet("Click to learn more!");
-                }
+                marker.setSnippet("Click to get menus, details and more!");
                 return false;
             }
         });
@@ -158,8 +158,38 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //directions to marker?
             }
         });
+        mDynamo = googleMap.addMarker(new MarkerOptions()
+                .position(Dynamo)
+                .title("JAMK Ravintola Bittipannu"));
+        mFiilu = googleMap.addMarker(new MarkerOptions()
+                .position(Fiilu)
+                .title("Ravintola Fiilu"));
+        mBest = googleMap.addMarker(new MarkerOptions()
+                .position(Best)
+                .title("Pizzeria Best"));
+        markers.add(mFiilu);
+        markers.add(mDynamo);
+        markers.add(mBest);
+
 
     }
+     public void moveCamera(boolean direction) {
+        if (direction) {
+            if (arrayindex == 2) arrayindex = -1;
+            arrayindex++;
+            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
+        }
+        else {
+            if (arrayindex == 0) arrayindex = 2;
+            arrayindex--;
+            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
+
+        }
+
+
+     }
+
+
 
 
 }
