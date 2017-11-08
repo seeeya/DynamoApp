@@ -13,3 +13,10 @@ function getFood() {
 		  })
 	});
 }
+
+function orderList() {
+	$("br").remove();
+	$(".food-fiilu").prepend($(".days table"));
+	$(".days table").remove();
+	);
+}
