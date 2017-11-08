@@ -3,9 +3,10 @@
 $(document).ready(function() {
 	
 	getFood();
-	  $("h2").click(function(){
-     alert('Handler for .click() called.')
-   });
+
+});
+$("h2").click(function(){
+     $(".day."+$(this).html()).toggle();
 });
 $( window ).load(function() {
   	orderList();
