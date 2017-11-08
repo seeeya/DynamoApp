@@ -12,6 +12,7 @@ function getFood() {
 			entryTemplate:'<div class="days"><h1>{title}</h1><br/><div class="food">{body}</div></div>'
 		  })
 	});
+	orderList();
 }
 
 function orderList() {
