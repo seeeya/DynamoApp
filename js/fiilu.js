@@ -22,7 +22,7 @@ function orderList() {
 	$(".food-fiilu").prepend($(".days table"));
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
-	$("h2").insertAfter("<div class='foodList'>");
+	
 	$('.food-fiilu div h2').each(function(){ 
     var $set = $(this).nextUntil("h2");
     $set.wrapAll('<div class="day ' + $(this).html() +'" />');
