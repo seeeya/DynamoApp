@@ -1,15 +1,14 @@
 //Scripts By N. V.
-$("h2").click(function(){
-	var noSpaces = $(this).html();
-     $(".day."+$.trim(noSpaces)).toggle();
-});
+
 
 $(document).ready(function() {
 	getFood();
+
 });
 
 $( window ).load(function() {
   	orderList();
+	
 });
 function getFood() {
 	jQuery(function($) {
@@ -33,3 +32,7 @@ function orderList() {
 	
 	
 }
+$("h2").click(function(){
+	var noSpaces = $(this).html();
+     $(".day."+$.trim(noSpaces)).toggle();
+});
