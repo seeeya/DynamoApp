@@ -13,9 +13,8 @@
 
   gtag('config', 'UA-108664137-1');
 </script>
-
+<link rel="stylesheet" type="text/css" href="./css/stylesheets/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 <script src="./js/jquery.rss.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 <script src="./js/fiilu.js"></script>

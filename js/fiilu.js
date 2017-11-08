@@ -1,13 +1,13 @@
 //Scripts By N. V.
+$("h2").click(function(){
+	var noSpaces = $(this).html();
+     $(".day."+$.trim(noSpaces)).toggle();
+});
 
 $(document).ready(function() {
-	
 	getFood();
+});
 
-});
-$("h2").click(function(){
-     $(".day."+$(this).html()).toggle();
-});
 $( window ).load(function() {
   	orderList();
 });
