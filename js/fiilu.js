@@ -28,6 +28,10 @@ function orderList() {
 	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
+	
+	$('.food-fiilu div h2').addClass("btn");
+	$('.food-fiilu div h2').addClass("btn-primary");
+	 
 	$('.food-fiilu div h2').each(function(){ 
     var $set = $(this).nextUntil("h2");
     $set.wrapAll('<div class="day ' + $(this).html() +'" />');
