@@ -25,7 +25,7 @@
 
 /*
 $dir    = './';
-$files1 = scandir($dir);
+$files1 = scandir($dir); 
 
 echo "Files in this folder: <br>";
 foreach ($files1 as $value) {
