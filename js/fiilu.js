@@ -3,7 +3,10 @@
 
 $(document).ready(function() {
 	getFood();
-
+		$("h2").click(function(){
+			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
+			 $(".day."+$.trim(noSpaces)).toggle();
+		});
 });
 
 $( window ).load(function() {
@@ -22,6 +25,7 @@ function getFood() {
 function orderList() {
 	$("br").remove();
 	$(".food-fiilu").prepend($(".days table"));
+	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
 	$('.food-fiilu div h2').each(function(){ 
@@ -32,7 +36,3 @@ function orderList() {
 	
 	
 }
-$("h2").click(function(){
-	var noSpaces = $(this).html();
-     $(".day."+$.trim(noSpaces)).toggle();
-});
