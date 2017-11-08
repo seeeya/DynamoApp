@@ -5,7 +5,7 @@ this file is for main css
 @import "compass/reset";
 @import "vars";
 h1 {
-color:$red;
+color:$blue;
 }
 .example {
 height:150px;
@@ -13,13 +13,20 @@ width:150px;
 background:red;
 border-radius:100%;
 	h1 {
-	color:$blue;
+	color:$red;
 	}
 }
 
 .food {
 	h2 {
 	cursor:pointer;
+	   -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+	}
+	h2:hover {
+	color:ltblue;
 	}
  .day {
  display:none;
@@ -28,4 +35,9 @@ border-radius:100%;
   -o-transition: all 2s ease-out;
   transition: all 2s ease-out;
  }
+}
+body {
+ font-family: "Times New Roman", Georgia, Serif;
+ 
+
 }
