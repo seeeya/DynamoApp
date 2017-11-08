@@ -2,13 +2,20 @@
 
 
 $(document).ready(function() {
+		$("h2").click(function(){
+			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
+			 $(".day."+$.trim(noSpaces)).toggle();
+		});
 	getFood();
 		$("h2").click(function(){
 			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
 			 $(".day."+$.trim(noSpaces)).toggle();
 		});
 });
-
+	$("h2").click(function(){
+			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
+			 $(".day."+$.trim(noSpaces)).toggle();
+		});
 $( window ).load(function() {
   	orderList();
 	
