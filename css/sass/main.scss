@@ -44,3 +44,24 @@ body {
   }
 
 }
+.content {
+width:1280px;
+max-width:100%;
+div {
+max-width:100%;
+}
+table {
+margin:0 auto;
+}
+.buttons {
+display:-ms-flexbox;
+display:-webkit-flex;
+display:flex;
+-ms-flex-justify:space-between;
+-webkit-justify-content:space-between;
+justify-content:space-between;
+
+
+
+}
+}
