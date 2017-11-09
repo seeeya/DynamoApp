@@ -42,6 +42,7 @@ foreach ($files1 as $value) {
 ?>
 
 <div class="content">
+<div class="fiilu-buttons"></div>
 <div class="food-fiilu"></div>
 </div>
 </body>
