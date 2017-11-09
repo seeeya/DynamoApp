@@ -6,9 +6,9 @@ $(document).ready(function() {
 });
 $( window ).load(function() {
   	orderList();
-	$( "button" ).click(function() {$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+	$( "button" ).click(function() {$(".day").hide(); $(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
 });
-$( "button" ).click(function() {$(".day").hide();$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+$( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
 
 function getFood() {
 	jQuery(function($) {
