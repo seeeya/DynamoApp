@@ -26,8 +26,10 @@ function orderList() {
 	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
+	$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>")
 	$('.food-fiilu div h2').each(function(){
-	$(this).parent(".food").parent(".days").children("h1").after('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
+		
+	$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
 
 	
     var $set = $(this).nextUntil("h2").andSelf();
