@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
             markers.get(arrayindex).setSnippet("Click to get menus, details and more!");
             markers.get(arrayindex).showInfoWindow();
+            
         }
 
 
