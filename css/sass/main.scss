@@ -60,13 +60,20 @@ display:flex;
 -ms-flex-wrap:wrap;
 -webkit-flex-wrap:wrap;
 flex-wrap:wrap;
--ms-flex-justify:space-between;
--webkit-justify-content:space-between;
-justify-content:space-between;
+-ms-flex-justify:space-around;
+-webkit-justify-content:space-around;
+justify-content:space-around;
 width:500px;
 max-width:100%;
 button {
 margin-bottom:15px}
 
+}
+
+}
+
+@media screen and (max-width:400px) {
+table {
+font-size:13px !important;
 }
 }

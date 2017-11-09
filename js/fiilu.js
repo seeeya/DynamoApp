@@ -6,8 +6,10 @@ $(document).ready(function() {
 });
 $( window ).load(function() {
   	orderList();
+	$( "button" ).click(function() {$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
 });
-$( "button" ).click(function() {$(this).parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+$( "button" ).click(function() {$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+
 function getFood() {
 	jQuery(function($) {
 		  $(".food-fiilu").rss("https://www.fazer.fi/api/location/menurss/current?pageId=29801&language=fi",
