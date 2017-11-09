@@ -29,12 +29,10 @@ function orderList() {
 	$(".days table").remove();
 
 	$('.food-fiilu div h2').each(function(){
-		if(buttons == false) {
-				$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>");
-				buttons = true;
+		if($(this).parent(".food").parent(".days").children(".buttons").length < 1 ) {
+				$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>")
 		}
-
-	$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
+				$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
 
 	
     var $set = $(this).nextUntil("h2").andSelf();
