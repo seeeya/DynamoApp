@@ -2,20 +2,10 @@
 
 
 $(document).ready(function() {
-		$("h2").click(function(){
-			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
-			 $(".day."+$.trim(noSpaces)).toggle();
-		});
+		
 	getFood();
-		$("h2").click(function(){
-			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
-			 $(".day."+$.trim(noSpaces)).toggle();
-		});
+	$( "button" ).click(function() {$(this).parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
 });
-	$("h2").click(function(){
-			var noSpaces = $(this).html().replace(/&nbsp;/gi,'');
-			 $(".day."+$.trim(noSpaces)).toggle();
-		});
 $( window ).load(function() {
   	orderList();
 	
@@ -35,13 +25,16 @@ function orderList() {
 	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
-	
+	$("h2").replace(/\s/g, '');
 	$('.food-fiilu div h2').each(function(){
-	$(this).parent(".food").parent(".days").children("h1").after('<button type="button" class="btn btn-primary">'+$(this).html()+'</button>');
-    var $set = $(this).nextUntil("h2").andSelf();
-$set.wrapAll('<div class="day ' + $(this).html() +'" />');
-});
+	$(this).parent(".food").parent(".days").children("h1").after('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
+
 	
+    var $set = $(this).nextUntil("h2").andSelf();
+$set.wrapAll('<div class="day ' + $(this).html().split(' ').join('') +'" />');
+});
+
 	
 	
 }
+
