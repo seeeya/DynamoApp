@@ -25,7 +25,7 @@
 
 
 <script>
- $( "button" ).click(function() {$(this).parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+ $( "button" ).click(function() {$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
 </script>
 
 </head>

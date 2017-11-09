@@ -32,7 +32,7 @@ function orderList() {
 		if($(this).parent(".food").parent(".days").children(".buttons").length < 1 ) {
 				$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>")
 		}
-				$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
+				$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$.trim($(this).html())+'</button>');
 
 	
     var $set = $(this).nextUntil("h2").andSelf();
