@@ -34,7 +34,7 @@ function orderList() {
 
 	
     var $set = $(this).nextUntil("h2").andSelf();
-$set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />');
+$set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />'); 
 });
 
 	$("button").each(function() { $(this).html($(this).html().replace(/&nbsp;/gi,''));});
