@@ -16,7 +16,7 @@ public class WebViewActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setVerticalScrollBarEnabled(false);
         webView.setHorizontalScrollBarEnabled(false);
-
-        webView.loadUrl("https://www.hesburger.fi/");
+        String url = getIntent().getStringExtra("URL");
+        webView.loadUrl(url);
     }
 }

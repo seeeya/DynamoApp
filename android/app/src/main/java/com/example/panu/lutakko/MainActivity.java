@@ -161,10 +161,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                String pageurl = new String("https://www.hesburger.fi/");
-                intent.putExtra("URL", pageurl);
-                startActivity(intent);
+                switch (marker.getTitle()) {
+                    case "Ravintola Fiilu":
+                        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                        String pageurl = new String("http://walkonen.fi/apps/dynamoapp/");
+                        intent.putExtra("URL", pageurl);
+                        startActivity(intent);
+                        break;
+                }
+
             }
         });
         googleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
