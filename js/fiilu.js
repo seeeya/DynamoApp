@@ -21,14 +21,19 @@ function getFood() {
 
 }
 function orderList() {
+	var buttons = false;
 	$("br").remove();
 	$(".food-fiilu").prepend($(".days table"));
 	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
-	$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>")
+
 	$('.food-fiilu div h2').each(function(){
-		
+		if(buttons == false) {
+				$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>");
+				buttons = true;
+		}
+
 	$(this).parent(".food").parent(".days").children(".buttons").append('<button type="button" class="btn btn-primary">'+$(this).html().split(' ').join('')+'</button>');
 
 	
