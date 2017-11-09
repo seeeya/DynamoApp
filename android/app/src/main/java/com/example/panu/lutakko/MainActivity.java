@@ -84,6 +84,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 moveCamera(up);
             }
         });
+        findViewById(R.id.floorDown).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean up = false;
+                moveCamera(up);
+            }
+        });
 
         // Set the toolbar title
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -139,6 +146,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(Marker marker) {
                 marker.setSnippet("Click to get menus, details and more!");
+                switch (marker.getTitle()) {
+                    case "JAMK Ravintola Bittipannu": arrayindex = 1;
+                    break;
+                    case "Pizzeria Best": arrayindex = 2;
+                    break;
+                    case "Ravintola Fiilu": arrayindex = 0;
+                    break;
+                }
                 return false;
             }
         });
@@ -178,12 +193,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (arrayindex == 2) arrayindex = -1;
             arrayindex++;
             gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
+            markers.get(arrayindex).setSnippet("Click to get menus, details and more!");
+            markers.get(arrayindex).showInfoWindow();
         }
         else {
-            if (arrayindex == 0) arrayindex = 2;
+            if (arrayindex == 0) arrayindex = 3;
             arrayindex--;
             gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
-
+            markers.get(arrayindex).setSnippet("Click to get menus, details and more!");
+            markers.get(arrayindex).showInfoWindow();
         }
 
 

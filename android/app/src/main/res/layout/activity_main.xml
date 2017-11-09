@@ -17,31 +17,30 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/header"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/floorContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:id="@+id/floorContainer">
+                android:orientation="horizontal">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/floorDown"
-                    android:src="@drawable/arrow_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
                     android:background="@drawable/item_selector"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:src="@android:drawable/arrow_down_float" />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/floorUp"
-                    android:src="@drawable/arrow_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/item_selector"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:src="@android:drawable/arrow_up_float" />
 
             </LinearLayout>
 
