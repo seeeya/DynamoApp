@@ -37,7 +37,7 @@ function orderList() {
 	$(".days table").remove();
 	
 	$('.food-fiilu div h2').each(function(){
-	$(this).parent(".days").children("h1").after('<button type="button" class="btn btn-primary">'+$(this).html()+'</button>');
+	$(this).parent(".food").parent(".days").children("h1").after('<button type="button" class="btn btn-primary">'+$(this).html()+'</button>');
     var $set = $(this).nextUntil("h2").andSelf();
 $set.wrapAll('<div class="day ' + $(this).html() +'" />');
 });
