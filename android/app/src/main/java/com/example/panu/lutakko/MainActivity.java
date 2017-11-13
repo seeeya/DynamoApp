@@ -1,6 +1,7 @@
 package com.example.panu.lutakko;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final LatLng Fiilu = new LatLng(62.240799, 25.757682);
     private static final LatLng Best = new LatLng(62.241710, 25.761445);
     private GoogleMap gMap;
+    private String pageurl = "http://walkonen.fi/apps/dynamoapp/";
 
 
 
@@ -115,22 +117,29 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void sendEnterNotification(ProximiioGeofence geofence) {
-            NotificationCompat.Builder mBuilder =
-                    (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.drawable.notification)
-                            .setContentTitle("You entered " + geofence.getName())
-                            .setContentText("Tap here to view menus and more!");
-            NotificationManager notifyManager =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notifyManager.notify(1, mBuilder.build());
+        Intent resultIntent = new Intent(MainActivity.this, WebViewActivity.class);
+        resultIntent.putExtra("URL", pageurl);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder mBuilder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.notification)
+                        .setContentTitle("You entered " + geofence.getName())
+                        .setContentText("Click here to view menus and more!");
+        NotificationManager notifyManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mBuilder.setContentIntent(resultPendingIntent);
+        notifyManager.notify(1, mBuilder.build());
     }
 
     public void sendExitNotification(ProximiioGeofence geofence, String dwell) {
+        Intent resultIntent = new Intent(MainActivity.this, WebViewActivity.class);
+        resultIntent.putExtra("URL", pageurl);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         String text;
         if (dwell == "") {
-            text = "Tap here to give feedback!";
+            text = "Click here to give feedback!";
         }
-        else text = "You spent " + dwell + " minutes here! Tap here to give feedback!";
+        else text = "You spent " + dwell + " minutes here! Click here to give feedback!";
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.notification)
@@ -138,8 +147,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .setContentText(text);
         NotificationManager notifyManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mBuilder.setContentIntent(resultPendingIntent);
         notifyManager.notify(1, mBuilder.build());
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

@@ -26,15 +26,22 @@ public class BackgroundListener extends BroadcastReceiver {
 
         switch (intent.getAction()) {
             case ProximiioAPI.ACTION_GEOFENCE_ENTER:
+                String pageurl = "http://walkonen.fi/apps/dynamoapp/";
                 geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
+                Intent resultIntent = new Intent(context, WebViewActivity.class);
+                resultIntent.putExtra("URL", pageurl);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
                 NotificationCompat.Builder mBuilder =
                          new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.notification)
-                                .setContentTitle("You entered " + geofence.getName())
+                                .setContentTitle("You Entered " + geofence.getName())
                                 .setContentText("Tap here to view menus and more!");
                 NotificationManager notifyManager =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                mBuilder.setContentIntent(resultPendingIntent);
                 notifyManager.notify(1, mBuilder.build());
+                break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
                 geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
@@ -56,8 +63,10 @@ public class BackgroundListener extends BroadcastReceiver {
                 NotificationManager notifyManager2 =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notifyManager2.notify(1, mBuilder2.build());
+                break;
         }
     }
+
 
 
 }
