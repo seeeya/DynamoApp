@@ -1,10 +1,13 @@
 package com.example.panu.lutakko;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.proximi.proximiiolibrary.ProximiioAPI;
-import io.proximi.proximiiolibrary.ProximiioFloor;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
 import io.proximi.proximiiolibrary.ProximiioGoogleMapHelper;
 import io.proximi.proximiiolibrary.ProximiioListener;
@@ -45,58 +47,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private static final String TAG = "Lutakko Lunch";
-
     public static final String AUTH = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImlzcyI6ImRiMDRhNjMyLWM2OTgtNDYwMC04ZDc4LWM0YTczYTFkZGI3MCIsInR5cGUiOiJhcHBsaWNhdGlvbiIsImFwcGxpY2F0aW9uX2lkIjoiMjkwM2JmNmEtMzA5NS00MDcxLTlkODktM2MzOTU0MjMwNDViIn0.2jU0sheug_ge8WiwA10fHIZViaWlAwnBzsRGGHhTSBA"; // TODO: Replace with your own!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create our Proximi.io listener
         proximiioAPI = new ProximiioAPI(TAG, this);
         proximiioAPI.setListener(new ProximiioListener() {
             @Override
             public void geofenceEnter(ProximiioGeofence geofence) {
-                toolbar = (Toolbar) findViewById(R.id.toolbar);
-                toolbar.setTitle("Enter: " + geofence.getName());
-                //Log.d(TAG, "Geofence enter: " + geofence.getName());
+                sendEnterNotification(geofence);
             }
 
             @Override
             public void geofenceExit(ProximiioGeofence geofence, @Nullable Long dwellTime) {
-                toolbar = (Toolbar) findViewById(R.id.toolbar);
-                toolbar.setTitle("Exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
-                //Log.d(TAG, "Geofence exit: " + geofence.getName() + ", dwell time: " + String.valueOf(dwellTime));
-            }
-
-            @Override
-            public void loginFailed(LoginError loginError) {
-                Log.e(TAG, "LoginError! (" + loginError.toString() + ")");
+                String dwellminutes = "";
+                if (dwellTime != null) {
+                    double dwell = dwellTime / 60;
+                    dwellminutes = String.valueOf(Math.round(dwell));
+                }
+                sendExitNotification(geofence, dwellminutes);
             }
         });
         proximiioAPI.setAuth(AUTH);
         proximiioAPI.setActivity(this);
 
-        findViewById(R.id.floorUp).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.arrowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean up = true;
-                moveCamera(up);
+                moveCamera(true);
             }
         });
-        findViewById(R.id.floorDown).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.arrowDown).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean up = false;
-                moveCamera(up);
+                moveCamera(false);
             }
         });
 
-        // Set the toolbar title
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(TAG);
-
-        // Initialize the map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -111,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,7 +114,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         proximiioAPI.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    // Called when the map is ready to use
+    public void sendEnterNotification(ProximiioGeofence geofence) {
+            NotificationCompat.Builder mBuilder =
+                    (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.notification)
+                            .setContentTitle("You entered " + geofence.getName())
+                            .setContentText("Tap here to view menus and more!");
+            NotificationManager notifyManager =
+                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notifyManager.notify(1, mBuilder.build());
+    }
+
+    public void sendExitNotification(ProximiioGeofence geofence, String dwell) {
+        String text;
+        if (dwell == "") {
+            text = "Tap here to give feedback!";
+        }
+        else text = "You spent " + dwell + " minutes here! Tap here to give feedback!";
+        NotificationCompat.Builder mBuilder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.notification)
+                        .setContentTitle("You exited " + geofence.getName())
+                        .setContentText(text);
+        NotificationManager notifyManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notifyManager.notify(1, mBuilder.build());
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;

@@ -27,7 +27,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/floorDown"
+                    android:id="@+id/arrowDown"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:background="@drawable/item_selector"
@@ -35,7 +35,7 @@
                     android:src="@android:drawable/arrow_down_float" />
 
                 <ImageButton
-                    android:id="@+id/floorUp"
+                    android:id="@+id/arrowUp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@drawable/item_selector"

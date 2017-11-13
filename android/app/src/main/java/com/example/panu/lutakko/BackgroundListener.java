@@ -14,68 +14,51 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.proximi.proximiiolibrary.ProximiioAPI;
+import io.proximi.proximiiolibrary.ProximiioGeofence;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class BackgroundListener extends BroadcastReceiver {
-    private static final String TAG = "BackgroundListener";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        ProximiioGeofence geofence;
+
         switch (intent.getAction()) {
-            case ProximiioAPI.ACTION_POSITION:
-                Log.d(TAG, "Position: " + intent.getDoubleExtra(ProximiioAPI.EXTRA_LAT, 0) + ", " + intent.getDoubleExtra(ProximiioAPI.EXTRA_LON, 0));
-                break;
-            case ProximiioAPI.ACTION_OUTPUT:
-                JSONObject json = null;
-                try {
-                    json = new JSONObject(intent.getStringExtra(ProximiioAPI.EXTRA_JSON));
-                }
-                catch (JSONException e) {
-                    // Not a push
-                }
-
-                if (json != null) {
-                    String title = null;
-                    try {
-                        if (!json.isNull("type") && !json.isNull("title")) {
-                            if (json.getString("type").equals("push")) {
-                                title = json.getString("title");
-                            }
-                        }
-                    }
-                    catch (JSONException e) {
-                        // Not a push
-                    }
-
-                    if (title != null) {
-                        Intent intent2 = new Intent(context, MainActivity.class);
-                        intent2.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-                        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
-                        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                                .setContentIntent(contentIntent)
+            case ProximiioAPI.ACTION_GEOFENCE_ENTER:
+                geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
+                NotificationCompat.Builder mBuilder =
+                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.notification)
-                                .setContentTitle(title);
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                            notificationBuilder.setPriority(Notification.PRIORITY_HIGH);
-                        }
-
-                        Notification notification = notificationBuilder.build();
-
-                        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                        notificationManager.notify(1, notification);
-                    }
+                                .setContentTitle("You entered " + geofence.getName())
+                                .setContentText("Tap here to view menus and more!");
+                NotificationManager notifyManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notifyManager.notify(1, mBuilder.build());
+            case ProximiioAPI.ACTION_GEOFENCE_EXIT:
+                long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
+                geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
+                String dwellminutes = "";
+                if (dwellTime != 0) {
+                    double dwell = dwellTime / 60;
+                    dwellminutes = String.valueOf(Math.round(dwell));
                 }
-                break;
-            case Intent.ACTION_BOOT_COMPLETED:
-                Log.d(TAG, "Phone booted!");
-                ProximiioAPI proximiioAPI = new ProximiioAPI("BackgroundReceiver", context);
-                proximiioAPI.setAuth(MainActivity.AUTH);
-                proximiioAPI.destroy();
-                break;
+                String text;
+                if (dwellminutes == "") {
+                    text = "Tap here to give feedback!";
+                }
+                else text = "You spent " + dwellminutes + " minutes here! Tap here to give feedback!";
+                NotificationCompat.Builder mBuilder2 =
+                        new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.notification)
+                                .setContentTitle("You exited " + geofence.getName())
+                                .setContentText(text);
+                NotificationManager notifyManager2 =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notifyManager2.notify(1, mBuilder2.build());
         }
     }
+
+
 }
 
