@@ -12,7 +12,11 @@ $( window ).load(function() {
 			
 		$(".day").hide(); 
 		}
+		else {
+				$(this).removeClass("active");
+		}
 		$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);
+		$(this).addClass("active");
 		current = "."+$(this).html();
 		});
 		
