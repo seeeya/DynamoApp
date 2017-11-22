@@ -31,7 +31,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,31 +257,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
      }
     public void insertMySQL(String place, String time, String phoneid) throws IOException {
-        String link = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php";
-        URL url = new URL(link);
-        HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-        httpURLConnection.setRequestMethod("POST");
-        httpURLConnection.setDoInput(true);
-        httpURLConnection.setDoOutput(true);
-        OutputStream outputStream = httpURLConnection.getOutputStream();
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-        String postdata = URLEncoder.encode("place","UTF-8")+"="+URLEncoder.encode(place, "UTF-8") +"&"+
-                URLEncoder.encode("time","UTF-8")+"="+URLEncoder.encode(time, "UTF-8") +"&"+
-                URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(phoneid, "UTF-8");
-        bufferedWriter.write(postdata);
-        bufferedWriter.flush();
-        bufferedWriter.close();
-        outputStream.close();
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-        String result = "";
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            result += line;
+        URL url = new URL("http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+place+"&time="+time+"&id="+phoneid+"");
+        URLConnection urlConn = url.openConnection();
+
+        if (!(urlConn instanceof HttpURLConnection)) {
+            throw new IOException ("URL is not an Http URL");
         }
-        bufferedReader.close();
-        inputStream.close();
-        httpURLConnection.disconnect();
+
+        HttpURLConnection httpConn = (HttpURLConnection)urlConn;
+        httpConn.setAllowUserInteraction(false);
+        httpConn.setInstanceFollowRedirects(true);
+        httpConn.setRequestMethod("GET");
+        httpConn.connect();
+        /*
+        int resCode = httpConn.getResponseCode();
+        if (resCode == HttpURLConnection.HTTP_OK) {
+            InputStream in = httpConn.getInputStream();
+        }*/
     }
 
 
