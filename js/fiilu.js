@@ -3,6 +3,9 @@
 var current = "";
 $(document).ready(function() {
 	getFood();
+	
+	
+	
 });
 $( window ).load(function() {
   	orderList();
@@ -68,5 +71,50 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
             HeightTable = $("table").height();
         }
     }
+	
+	if(window.innerWidth < 500) {
+		invertTable("table");
+	}
+	
 }
+function invertTable(table){
+
+    var $table = $(table);
+    
+    var invertedTable = [];
+    
+    for(var i=0 ; i < $table.find('tr:first th').length ; i++){
+     
+        invertedTable.push([]);
+        
+    }
+    
+    $table.find('th,td').each(function(){
+          invertedTable[$(this).index()].push($(this).text());    
+    })
+    
+    var $newTable = $('<table></table>');
+    
+    for(var i=0 ; i < invertedTable.length ; i++){
+        
+        var $newTr = $('<tr></tr>');
+        
+        for(var j = 0 ; j < invertedTable[i].length ; j++){
+            
+            if(j == 0 || i == 0){
+                $newTr.append('<th>'+invertedTable[i][j]+'</th>');
+            }
+            else{
+                $newTr.append('<td>'+invertedTable[i][j]+'</td>');
+            }
+            
+        }
+        
+        $newTable.append($newTr);
+    }
+    
+    $table.after($newTable)
+    $table.remove();
+}
+
 
