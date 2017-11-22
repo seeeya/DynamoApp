@@ -1,5 +1,4 @@
 <?php
-echo "halooooo";
 require "mysql_conn.php";
 $place = $_GET("place");
 $entertime = $_GET("time");
