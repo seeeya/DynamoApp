@@ -1,7 +1,8 @@
 <?php
 $dbname = "dynamoapp";
-$dbuser = "dunamoapp";
+$dbuser = "dynamoapp";
 $dbpassword = "yFgyeJicK59a3bEq";
-$server = "94.237.40.132";
+$server = "walkonen.fi";
 $conn = mysqli_connect($server, $dbuser, $dbpassword, $dbname);
+
 ?>
