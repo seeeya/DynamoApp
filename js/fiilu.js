@@ -1,14 +1,26 @@
 //Scripts By N. V.
 
-
+var current = "";
 $(document).ready(function() {
 	getFood();
 });
 $( window ).load(function() {
   	orderList();
-	$( "button" ).click(function() {$(".day").hide(); $(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+	
+	$( "button" ).click(function() {
+		if(current !== "."+$(this).html()) {
+			
+		$(".day").hide(); 
+		}
+		$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);
+		current = "."+$(this).html();
+		});
+		
 });
-$( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).toggle();});
+$( "h1" ).click(function() {
+	
+}
+$( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);});
 
 function getFood() {
 	jQuery(function($) {
@@ -27,8 +39,6 @@ function orderList() {
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
 	$("p strong").parent("p").hide();
-	
-
 	$('.food-fiilu div h2').each(function(){
 		if($(this).parent(".food").parent(".days").children(".buttons").length < 1 ) {
 				$(this).parent(".food").parent(".days").children("h1").after("<div class='buttons'></div>")
