@@ -1,5 +1,6 @@
 <?php
 require "mysql_conn.php";
+echo "HALOO";
 $place = $_GET("place");
 $entertime = $_GET("time");
 $id = $_GET("id");
