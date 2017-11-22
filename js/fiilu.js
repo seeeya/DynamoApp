@@ -13,11 +13,14 @@ $( window ).load(function() {
 		$(".day").hide(); 
 		$("button").removeClass("active");
 		}
+		if($(this).hasClass("active")) {
+		$("button").removeClass("active");
+		}
 		else {
-				$(this).removeClass("active");
+			$(this).addClass("active");
 		}
 		$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);
-		$(this).addClass("active");
+		
 		current = "."+$(this).html();
 		});
 		
