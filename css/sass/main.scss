@@ -3,6 +3,9 @@ this file is for main css
  */
 @import "compass/css3";
 @import "vars";
+body {
+max-width:100%;
+}
 h1 {
 color:$blue;
 }
@@ -72,6 +75,9 @@ button {
 margin-bottom:15px}
 
 }
+button.active {
+background-color:#01c6d8;
+}
 
 }
 
@@ -79,4 +85,16 @@ margin-bottom:15px}
 table {
 font-size:13px !important;
 }
+.content .buttons button {
+width:150px;
 }
+.content  .buttons {
+flex-direction:column;
+align-items:center;
+-webkit-flex-direction:column;
+-webkit-align-items:center;
+-ms-flex-pack:center;
+-ms-flex-direction:column;
+}
+}
+
