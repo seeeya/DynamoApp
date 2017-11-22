@@ -3,6 +3,9 @@ this file is for main css
  */
 @import "compass/css3";
 @import "vars";
+body {
+max-width:100%;
+}
 h1 {
 color:$blue;
 }
@@ -82,4 +85,6 @@ background-color:#01c6d8;
 table {
 font-size:13px !important;
 }
+
 }
+
