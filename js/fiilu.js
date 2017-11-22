@@ -73,7 +73,7 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
     }
 	
 	if(window.innerWidth < 500) {
-		invertTable("table");
+		invertTable('table tbody');
 	}
 	
 }
