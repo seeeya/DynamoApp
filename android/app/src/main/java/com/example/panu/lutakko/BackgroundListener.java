@@ -9,32 +9,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
-import com.loopj.android.http.HttpGet;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.protocol.HTTP;
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
 
 public class BackgroundListener extends BroadcastReceiver {
-
+    private static final String TAG = "Background";
     @Override
     public void onReceive(Context context, Intent intent) {
         ProximiioGeofence geofence;
@@ -56,13 +48,9 @@ public class BackgroundListener extends BroadcastReceiver {
                 mBuilder.setContentIntent(resultPendingIntent);
                 notifyManager.notify(1, mBuilder.build());
                 Date dNow = new Date();
-                SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+                SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd_hh:mm:ss");
                 String time = ft.format(dNow).toString();
-                try {
-                    insertMySQL(geofence.getName(), time, phoneid, context);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                insertMySQL(geofence.getName(), time, phoneid, context);
                 break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
@@ -89,39 +77,26 @@ public class BackgroundListener extends BroadcastReceiver {
 
         }
     }
-    public void insertMySQL(String place, String time, String phoneid, Context context) throws IOException {
-        String link = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php";
-        URL url = new URL(link);
-        HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-        httpURLConnection.setRequestMethod("POST");
-        httpURLConnection.setDoInput(true);
-        httpURLConnection.setDoOutput(true);
-        OutputStream outputStream = httpURLConnection.getOutputStream();
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-        String postdata = URLEncoder.encode("place","UTF-8")+"="+URLEncoder.encode(place, "UTF-8") +"&"+
-                URLEncoder.encode("time","UTF-8")+"="+URLEncoder.encode(time, "UTF-8") +"&"+
-                URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(phoneid, "UTF-8");
-        bufferedWriter.write(postdata);
-        bufferedWriter.flush();
-        bufferedWriter.close();
-        outputStream.close();
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-        String result = "";
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            result += line;
+    public void insertMySQL(String place, String time, String phoneid, Context context) {
+        String url = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+place+"&time="+time+"&id="+phoneid+"";
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, error.toString());
+            }
+        });
+            queue.add(stringRequest);
         }
-        bufferedReader.close();
-        inputStream.close();
-        httpURLConnection.disconnect();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(result)
-                .setTitle("testi");
-        AlertDialog dialog = builder.create();
     }
 
 
 
-}
+
 

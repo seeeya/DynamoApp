@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         findViewById(R.id.arrowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertMySQL("Testipaikka", "2017-01-01 12:23:42", "Testiphone");
+                insertMySQL("Testipaikka", "2017-01-01-12:23:42", "Testiphone");
                 moveCamera(true);
             }
         });
@@ -267,18 +267,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         String url = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+place+"&time="+time+"&id="+phoneid+"";
+        //http://www.mocky.io/v2/5a1601d03100004e008d3171
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        toolbar.setTitle(response.substring(0,30));
-                        toolbar.setTitle("haloo");
+                        toolbar.setTitle(response.toString());
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                toolbar.setTitle(error.toString());
             }
         });
 // Add the request to the RequestQueue.
