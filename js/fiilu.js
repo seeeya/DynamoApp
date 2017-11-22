@@ -26,6 +26,8 @@ function orderList() {
 	$(".food-fiilu table").addClass("table-bordered");
 	$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
+	$("p strong").parent("p").hide();
+	
 
 	$('.food-fiilu div h2').each(function(){
 		if($(this).parent(".food").parent(".days").children(".buttons").length < 1 ) {
