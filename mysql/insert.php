@@ -11,10 +11,10 @@ $query = "INSERT INTO visit (place, enter_time, visitor) VALUES ('". $place . "'
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-if (mysqli_query($conn, $sql)) {
+if (mysqli_query($conn, $query)) {
     echo "Success";
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $query . "<br>" . mysqli_error($conn);
 }
 
 mysqli_close($conn);
