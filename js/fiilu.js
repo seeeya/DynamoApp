@@ -11,6 +11,7 @@ $( window ).load(function() {
 		if(current !== "."+$(this).html()) {
 			
 		$(".day").hide(); 
+		$("button").removeClass("active");
 		}
 		else {
 				$(this).removeClass("active");
