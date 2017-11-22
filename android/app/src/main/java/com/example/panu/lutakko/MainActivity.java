@@ -14,6 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +28,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.loopj.android.http.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,6 +45,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.ResponseHandler;
+import cz.msebera.android.httpclient.impl.client.BasicResponseHandler;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
 import io.proximi.proximiiolibrary.ProximiioGoogleMapHelper;
@@ -91,11 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         findViewById(R.id.arrowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    insertMySQL("Testipaikka", "2017-01-01 12:23:42", "Testiphone");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                insertMySQL("Testipaikka", "2017-01-01 12:23:42", "Testiphone");
                 moveCamera(true);
             }
         });
@@ -256,24 +263,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
      }
-    public void insertMySQL(String place, String time, String phoneid) throws IOException {
-        URL url = new URL("http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+place+"&time="+time+"&id="+phoneid+"");
-        URLConnection urlConn = url.openConnection();
+    public void insertMySQL(String place, String time, String phoneid) {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        if (!(urlConn instanceof HttpURLConnection)) {
-            throw new IOException ("URL is not an Http URL");
-        }
+        String url = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+place+"&time="+time+"&id="+phoneid+"";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        toolbar.setTitle(response.substring(0,30));
+                        toolbar.setTitle("haloo");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-        HttpURLConnection httpConn = (HttpURLConnection)urlConn;
-        httpConn.setAllowUserInteraction(false);
-        httpConn.setInstanceFollowRedirects(true);
-        httpConn.setRequestMethod("GET");
-        httpConn.connect();
-        /*
-        int resCode = httpConn.getResponseCode();
-        if (resCode == HttpURLConnection.HTTP_OK) {
-            InputStream in = httpConn.getInputStream();
-        }*/
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
 
