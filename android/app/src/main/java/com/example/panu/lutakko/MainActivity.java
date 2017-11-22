@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         findViewById(R.id.arrowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String link = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place=testipaikka&entertime=2017-01-01 00:00:00&id=testipuhelin;
+                URL url = new URL("link");
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 moveCamera(true);
             }
         });
