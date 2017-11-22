@@ -9,4 +9,5 @@ if($conn->query($query) == TRUE) {
 }
 else echo "Error " . $conn->error;
 conn->close();
+
 ?>
