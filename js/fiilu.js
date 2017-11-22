@@ -19,7 +19,7 @@ $( window ).load(function() {
 });
 $( "h1" ).click(function() {
 	
-}
+});
 $( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);});
 
 function getFood() {
