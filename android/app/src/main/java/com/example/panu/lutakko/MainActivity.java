@@ -1,5 +1,6 @@
 package com.example.panu.lutakko;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -22,8 +23,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,9 +89,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         findViewById(R.id.arrowUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String link = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php?place=testipaikka&entertime=2017-01-01 00:00:00&id=testipuhelin;
-                URL url = new URL("link");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try {
+                    insertMySQL("Testipaikka", "2017-01-01 12:23:42", "Testiphone");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 moveCamera(true);
             }
         });
@@ -243,6 +254,33 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
      }
+    public void insertMySQL(String place, String time, String phoneid) throws IOException {
+        String link = "http://walkonen.fi/apps/dynamoapp/mysql/insert.php";
+        URL url = new URL(link);
+        HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+        httpURLConnection.setRequestMethod("POST");
+        httpURLConnection.setDoInput(true);
+        httpURLConnection.setDoOutput(true);
+        OutputStream outputStream = httpURLConnection.getOutputStream();
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        String postdata = URLEncoder.encode("place","UTF-8")+"="+URLEncoder.encode(place, "UTF-8") +"&"+
+                URLEncoder.encode("time","UTF-8")+"="+URLEncoder.encode(time, "UTF-8") +"&"+
+                URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(phoneid, "UTF-8");
+        bufferedWriter.write(postdata);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        outputStream.close();
+        InputStream inputStream = httpURLConnection.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+        String result = "";
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            result += line;
+        }
+        bufferedReader.close();
+        inputStream.close();
+        httpURLConnection.disconnect();
+    }
 
 
 
