@@ -25,7 +25,10 @@ import java.util.Date;
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
 
+
+
 public class BackgroundListener extends BroadcastReceiver {
+    public String time = "";
     private static final String TAG = "Background";
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -49,17 +52,16 @@ public class BackgroundListener extends BroadcastReceiver {
                 notifyManager.notify(1, mBuilder.build());
                 Date dNow = new Date();
                 SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd_hh:mm:ss");
-                String time = ft.format(dNow).toString();
+                time = ft.format(dNow).toString();
                 insertMySQL(geofence.getName(), time, phoneid, context);
                 break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
                 geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
                 String dwellminutes = "";
-                if (dwellTime != 0) {
-                    double dwell = dwellTime / 60;
-                    dwellminutes = String.valueOf(Math.round(dwell));
-                }
+                double dwell = dwellTime / 60;
+                int dwellint = (int) Math.round(dwell);
+                dwellminutes = String.valueOf(Math.round(dwell));
                 String text;
                 if (dwellminutes == "") {
                     text = "Tap here to give feedback!";
@@ -73,6 +75,11 @@ public class BackgroundListener extends BroadcastReceiver {
                 NotificationManager notifyManager2 =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notifyManager2.notify(1, mBuilder2.build());
+                if (time.equals("")) {
+                    time = "undefined"
+                    updateMySQL(geofence.getName(), time, phoneid, context, dwellint);
+                }
+
                 break;
 
         }
@@ -94,7 +101,30 @@ public class BackgroundListener extends BroadcastReceiver {
         });
             queue.add(stringRequest);
         }
+
+    public void updateMySQL(String place, String time, String phoneid, Context context, int duration) {
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd_hh:mm:ss");
+        String exittime = ft.format(dNow).toString();
+        String url = "http://walkonen.fi/apps/dynamoapp/mysql/update.php?place="+place+"&time="+time+"&id="+phoneid+"&duration="+duration+"&exit="+exittime+"";
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, error.toString());
+            }
+        });
+        queue.add(stringRequest);
     }
+    }
+
+}
 
 
 
