@@ -8,7 +8,7 @@ $place = $_GET["place"];
 $time = $_GET["time"];
 $id = $_GET["id"];
 $duration = $_GET["duration"];
-$duration = intval(duration);
+$duration = intval($duration);
 $exit = $_GET["exit"];
 $query = "UPDATE visit SET duration = ".$duration.", exit_time = '".$exit."'
  WHERE place = '".$place."' AND enter_time = '".$time."' AND visitor = '".$id."'";
