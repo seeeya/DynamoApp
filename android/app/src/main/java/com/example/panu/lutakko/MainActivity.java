@@ -42,7 +42,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -262,8 +264,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
      }
-    
-
 
 
 
