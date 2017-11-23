@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/home/phakala/mysql_conn.php";
+require_once("/home/phakala/mysql_conn.php");
 $place = $_GET["place"];
 $time = $_GET["time"];
 $id = $_GET["id"];
