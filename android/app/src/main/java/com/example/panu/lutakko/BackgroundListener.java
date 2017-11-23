@@ -76,7 +76,7 @@ public class BackgroundListener extends BroadcastReceiver {
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notifyManager2.notify(1, mBuilder2.build());
                 if (time.equals("")) {
-                    time = "undefined"
+                    time = "undefined";
                     updateMySQL(geofence.getName(), time, phoneid, context, dwellint);
                 }
 
@@ -124,7 +124,7 @@ public class BackgroundListener extends BroadcastReceiver {
     }
     }
 
-}
+
 
 
 
