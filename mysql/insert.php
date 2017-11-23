@@ -1,9 +1,5 @@
 <?php
-$dbname = "dynamoapp";
-$dbuser = "dynamoapp";
-$dbpassword = "yFgyeJicK59a3bEq";
-$server = "walkonen.fi";
-$conn = mysqli_connect($server, $dbuser, $dbpassword, $dbname);
+require __DIR__ . "/home/phakala/mysql_conn.php";
 $place = $_GET["place"];
 $time = $_GET["time"];
 $id = $_GET["id"];
