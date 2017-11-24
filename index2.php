@@ -58,9 +58,13 @@ $json = json_decode($str, true);
 foreach ($json['courses'] as $field) {
    if ($field['category'] == 'Mix & Match'){continue;}   
    echo $field['category'];
-   echo $field['title_fi'] . PHP_EOL;
-   echo $field['desc_fi'] . PHP_EOL;
-   echo $field['price'] . PHP_EOL . PHP_EOL;
+   echo $field['title_fi'];
+   echo "\r\n";
+   echo $field['desc_fi'];
+   echo "\r\n";
+   echo $field['price'];
+   echo "\r\n";
+   echo "\r\n";
 }
 
 
