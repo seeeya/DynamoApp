@@ -33,8 +33,9 @@ public class BackgroundListener extends BroadcastReceiver {
     private static final String TAG = "Background";
     @Override
     public void onReceive(Context context, Intent intent) {
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
         ProximiioGeofence geofence;
-        String phoneid = Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.USER;
+        String phoneid = Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.FINGERPRINT;
         try {
             phoneid = URLEncoder.encode(phoneid, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -57,11 +58,12 @@ public class BackgroundListener extends BroadcastReceiver {
                 mBuilder.setContentIntent(resultPendingIntent);
                 notifyManager.notify(1, mBuilder.build());
                 Date dNow = new Date();
-                SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd_hh:mm:ss");
+                ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
                 String time = ft.format(dNow).toString();
                 String url_name = null;
                 try {
                     url_name = URLEncoder.encode(geofence.getName(), "UTF-8");
+                    time = URLEncoder.encode(time, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -83,7 +85,6 @@ public class BackgroundListener extends BroadcastReceiver {
                 //insertMySQL(geofence.getName(), time, phoneid, context);
                 break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
-                Log.d(TAG, time);
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
                 geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
                 String dwellminutes = "";
@@ -98,18 +99,17 @@ public class BackgroundListener extends BroadcastReceiver {
                 NotificationCompat.Builder mBuilder2 =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.notification)
-                                .setContentTitle("time: " + time)
-                                //.setContentTitle("You exited " + geofence.getName())
+                                .setContentTitle("You exited " + geofence.getName())
                                 .setContentText(text);
                 NotificationManager notifyManager2 =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 notifyManager2.notify(1, mBuilder2.build());
                 Date dexit = new Date();
-                SimpleDateFormat ft1 = new SimpleDateFormat ("yyyy-MM-dd_hh:mm:ss");
-                String exittime = ft1.format(dexit).toString();
+                String exittime = ft.format(dexit).toString();
                 String url_name1 = null;
                 try {
                     url_name1 = URLEncoder.encode(geofence.getName(), "UTF-8");
+                    exittime = URLEncoder.encode(exittime, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
