@@ -7,7 +7,7 @@ $duration = $_GET["duration"];
 $duration = intval($duration);
 $exit = $_GET["exit"];
 $query = "UPDATE visit SET duration = ".$duration.", exit_time = '".$exit."'
- WHERE place = '".$place."' AND enter_time = '".$time."' AND visitor = '".$id."'";
+ WHERE place = '".$place."' AND visitor = '".$id."' AND exit_time = ''";
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
