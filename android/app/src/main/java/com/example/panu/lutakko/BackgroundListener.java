@@ -35,7 +35,7 @@ public class BackgroundListener extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
         ProximiioGeofence geofence;
-        String phoneid = Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.FINGERPRINT;
+        String phoneid = Build.MANUFACTURER + " " + Build.FINGERPRINT;
         try {
             phoneid = URLEncoder.encode(phoneid, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -132,7 +132,8 @@ public class BackgroundListener extends BroadcastReceiver {
                 break;
         }
         }
-    }
+
+}
 
 
 
