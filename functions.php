@@ -8,7 +8,7 @@ class sitesData {
 	   $arrayLength = count($array);
 	   
 	   for($i = 0 ; $i < $arrayLength ; $i++) {
-	   echo "<li><a href='?page=".$array[$i]."'>" .$array[$i]. "</a></li>";
+	   echo "<li><a href='?page=".$array[$i]."'>" .ucfirst($array[$i]). "</a></li>";
 	   
 	   }
 	   echo "</ul>";
