@@ -2,8 +2,9 @@
 
 var current = "";
 $(document).ready(function() {
+	if($(".food-fiilu").length) {
 	getFood();
-	
+	}
 	
 	
 });

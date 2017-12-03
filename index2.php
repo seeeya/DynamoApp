@@ -32,43 +32,7 @@
 </head>
 <body id="index" class="home">
 
-<?php
 
-/*
-$dir    = './';
-$files1 = scandir($dir); 
-
-echo "Files in this folder: <br>";
-foreach ($files1 as $value) {
-	if($value != ".") {
-		if($value != "..") {	
-		if($value != "index.php" && $value !== "deploy.php" && $value !== ".git"){
-			 echo "<a href='$value'>$value</a> <br />\n";
-		}
-		}
-	}
-}*/
-
-// file_get_contents call instead
-$str = file_get_contents('https://www.sodexo.fi/ruokalistat/output/daily_json/5865/2017/11/24/fi');
-//echo $str;
-// decode JSON
-$json = json_decode($str, true);
-
-foreach ($json['courses'] as $field) {
-   if ($field['category'] == 'Mix & Match'){continue;}   
-   echo $field['category'];
-   echo $field['title_fi'];
-   echo "\r\n";
-   echo $field['desc_fi'];
-   echo "\r\n";
-   echo $field['price'];
-   echo "\r\n";
-   echo "\r\n";
-}
-
-
-?>
 
 
 

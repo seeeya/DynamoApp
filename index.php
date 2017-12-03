@@ -1,3 +1,11 @@
+
+<?php
+
+require_once("functions.php");
+$page = new sitesData();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,36 +31,17 @@
 <script src="./js/tether.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-
-<script>
- 
-</script>
-
 </head>
 <body id="index" class="home">
-
+<div class="headerContainer">
+<div class="menu">
 <?php
-
-/*
-$dir    = './';
-$files1 = scandir($dir); 
-
-echo "Files in this folder: <br>";
-foreach ($files1 as $value) {
-	if($value != ".") {
-		if($value != "..") {	
-		if($value != "index.php" && $value !== "deploy.php" && $value !== ".git"){
-			 echo "<a href='$value'>$value</a> <br />\n";
-		}
-		}
-	}
-}*/
+$page->listMenu();
 ?>
-
+</div>
+</div>
 <div class="content">
-<div class="fiilu-buttons"></div>
-<div class="food-fiilu"></div>
+<?php $page->displayPage($_GET['page']); ?>
 </div>
 </body>
 </html>
