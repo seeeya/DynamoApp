@@ -21,7 +21,11 @@ $page = new sitesData();
   gtag('js', new Date());
 
   gtag('config', 'UA-108664137-1');
- 
+ $('.menu a#toggle').click(function() {
+  $('ul').slideToggle(200, function() {
+    // Animation complete.
+  });
+});
 </script>
 <link rel="stylesheet" type="text/css" href="./css/stylesheets/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
