@@ -9,7 +9,7 @@ $(document).ready(function() {
 $( window ).load(function() {
   	orderList();
 		$('.menu a#toggle').click(function() {
-	  $('ul').slideToggle(200, function() {
+	  $('.menu ul').slideToggle(200, function() {
 		// Animation complete.
 	  });
 	});
@@ -33,7 +33,7 @@ $( window ).load(function() {
 });
 
 $('.menu a#toggle').click(function() {
-  $('ul').slideToggle(200, function() {
+  $('.menu ul').slideToggle(200, function() {
     // Animation complete.
   });
 });
