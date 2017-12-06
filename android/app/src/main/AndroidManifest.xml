@@ -4,9 +4,8 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -30,13 +29,24 @@
             android:name=".BackgroundListener"
             android:exported="false">
             <intent-filter>
-                <action android:name="io.proximi.proximiiolibrary.action.GEOFENCE_ENTER"/>
-                <action android:name="io.proximi.proximiiolibrary.action.GEOFENCE_EXIT"/>
+                <action android:name="io.proximi.proximiiolibrary.action.GEOFENCE_ENTER" />
+                <action android:name="io.proximi.proximiiolibrary.action.GEOFENCE_EXIT" />
             </intent-filter>
         </receiver>
 
         <activity android:name=".WebViewActivity" />
         <activity android:name=".BackgroundListener" />
+        <activity android:name=".DeepLinkHandler">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="lutakkoapp"
+                    android:host="open" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.panu.lutakko;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -16,7 +17,15 @@ public class WebViewActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setVerticalScrollBarEnabled(false);
         webView.setHorizontalScrollBarEnabled(false);
-        String url = getIntent().getStringExtra("URL");
+        Intent intent = getIntent();
+        String url;
+        if (intent.hasExtra("URL")) {
+            url = intent.getStringExtra("URL");
+        }
+        else {
+            String location = intent.getStringExtra("location");
+            url = "http://student.labranet.jamk.fi/~K2065/test/iot.php?location=" + location;
+        }
         webView.loadUrl(url);
     }
 }
