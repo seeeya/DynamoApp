@@ -8,7 +8,11 @@ $(document).ready(function() {
 });
 $( window ).load(function() {
   	orderList();
-	
+		$('.menu a#toggle').click(function() {
+	  $('ul').slideToggle(200, function() {
+		// Animation complete.
+	  });
+	});
 	$( "button" ).click(function() {
 		if(current !== "."+$(this).html()) {
 			
