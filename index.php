@@ -13,6 +13,8 @@ $page = new sitesData();
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
 <title>LutakkoApp TBD</title>
  
+<script src="https://use.fontawesome.com/11fce71098.js"></script>
+
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108664137-1"></script>
 <script>
@@ -21,11 +23,7 @@ $page = new sitesData();
   gtag('js', new Date());
 
   gtag('config', 'UA-108664137-1');
- $('.menu a#toggle').click(function() {
-  $('ul').slideToggle(200, function() {
-    // Animation complete.
-  });
-});
+
 </script>
 <link rel="stylesheet" type="text/css" href="./css/stylesheets/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -39,7 +37,8 @@ $page = new sitesData();
 <body id="index" class="home">
 <div class="headerContainer">
 <div class="menu">
-  <a href="#" id="toggle">Menu </a>
+  <a href="#" id="toggle">Menu <i class="fa fa-bars" aria-hidden="true"></i>
+</a>
 <?php
 $page->listMenu();
 ?>

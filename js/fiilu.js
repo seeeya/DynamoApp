@@ -1,16 +1,10 @@
 //Scripts By N. V.
-$('.menu a#toggle').click(function() {
-  $('ul').slideToggle(200, function() {
-    // Animation complete.
-  });
-});
+
 var current = "";
 $(document).ready(function() {
 	if($(".food-fiilu").length) {
 	getFood();
 	}
-	
-	
 });
 $( window ).load(function() {
   	orderList();
@@ -33,8 +27,15 @@ $( window ).load(function() {
 		});
 		
 });
+
+$('.menu a#toggle').click(function() {
+  $('ul').slideToggle(200, function() {
+    // Animation complete.
+  });
+});
+
 $( "h1" ).click(function() {
-	
+
 });
 $( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);});
 
