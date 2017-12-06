@@ -47,10 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.ResponseHandler;
-import cz.msebera.android.httpclient.impl.client.BasicResponseHandler;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
 import io.proximi.proximiiolibrary.ProximiioGoogleMapHelper;
@@ -119,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
 
     @Override
     protected void onDestroy() {
@@ -214,15 +212,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                String pageurl;
                 switch (marker.getTitle()) {
                     case "Ravintola Fiilu":
-                        Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                        String pageurl = new String("http://walkonen.fi/apps/dynamoapp/");
+                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=fiilu");
                         intent.putExtra("URL", pageurl);
-                        startActivity(intent);
+                        break;
+                    case "JAMK Ravintola Bittipannu":
+                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=sodexo");
+                        intent.putExtra("URL", pageurl);
+                        break;
+                    case "Pizzeria Best":
+                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=sodexo");
+                        intent.putExtra("URL", pageurl);
                         break;
                 }
-
+                startActivity(intent);
             }
         });
         googleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {

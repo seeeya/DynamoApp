@@ -43,8 +43,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="lutakkoapp"
-                    android:host="open" />
+                <data android:scheme="https"
+                    android:host="walkonen.fi"
+                    android:pathPrefix="/apps/dynamoapp/"/>
             </intent-filter>
         </activity>
     </application>

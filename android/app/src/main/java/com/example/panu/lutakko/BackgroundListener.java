@@ -33,7 +33,7 @@ public class BackgroundListener extends BroadcastReceiver {
     private static final String TAG = "Background";
     @Override
     public void onReceive(Context context, Intent intent) {
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
         ProximiioGeofence geofence;
         String phoneid = Build.MANUFACTURER + " " + Build.FINGERPRINT;
         try {

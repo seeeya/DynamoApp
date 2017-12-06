@@ -12,9 +12,9 @@ public class DeepLinkHandler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         Uri data = intent.getData();
-        String location = data.getPath().substring(1);
+        String query = data.getQuery();
         Intent handlerIntent = new Intent(this, WebViewActivity.class);
-        handlerIntent.putExtra("location", location);
+        handlerIntent.putExtra("location", query);
         handlerIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(handlerIntent);
     }
