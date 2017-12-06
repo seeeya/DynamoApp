@@ -97,4 +97,23 @@ align-items:center;
 -ms-flex-direction:column;
 }
 }
+.menu {
+	  background-color: #0733C3;
+	  text-align: center;
+	* {
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	}
+	#toggle { 
+	  font-size: 24px; 
+	}
+	 ul { 
+	  display: none; 
+	}
+	a { 
+	  color: #fff;
+	  text-decoration: none; 
+	}
 
+}

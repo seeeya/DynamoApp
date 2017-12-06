@@ -35,9 +35,13 @@ $page = new sitesData();
 <body id="index" class="home">
 <div class="headerContainer">
 <div class="menu">
+  <a href="#" id="toggle">Menu </a>
 <?php
 $page->listMenu();
 ?>
+
+
+
 </div>
 </div>
 <div class="content">

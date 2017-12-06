@@ -1,5 +1,9 @@
 //Scripts By N. V.
-
+$('.menu a#toggle').click(function() {
+  $('ul').slideToggle(200, function() {
+    // Animation complete.
+  });
+});
 var current = "";
 $(document).ready(function() {
 	if($(".food-fiilu").length) {
