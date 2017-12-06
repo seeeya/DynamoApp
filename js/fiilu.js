@@ -50,7 +50,7 @@ function getFood() {
 			entryTemplate:'<div class="days"><h1>{title}</h1><br/><div class="food">{body}</div></div>'
 		  })
 	});
-
+	getSodexo();
 }
 function orderList() {
 	var buttons = false;
@@ -86,6 +86,20 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 
 	}
 	
+}
+function getSodexo() {
+$.getJSON( "https://walkonen.fi/sodexo.php", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    items.push( "<li id='" + key + "'>" + val + "</li>" );
+	});
+ 
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+	}).appendTo( ".sodexo-food" );
+});
+
 }
 
 
