@@ -127,14 +127,16 @@ font-size:12px;
 h3 {
 font-size:16px;
 cursor:pointer;
-font-weigth: bold;
+font-weight: bold;
 
 }
 .otherdata {
 display:none;
 }
 .desc {
-font-weigth: bold;
+font-weight: bold;
 }
-
+.price {
+text-decoration:underline;
+}
 }

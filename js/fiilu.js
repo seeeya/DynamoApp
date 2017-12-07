@@ -112,7 +112,7 @@ function getSodexo() {
 				data += "("+result.courses[num].properties+")";
 				}
 				if(result.courses[num].price) {
-				data += "<span class='price'>"+ result.courses[num].price +" €</span>";
+				data += " <span class='price'>"+ result.courses[num].price +" €</span>";
 				}
 				data += "</h3>";
 				data+="<div class='otherdata"+num+" otherdata'>";
