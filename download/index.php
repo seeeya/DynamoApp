@@ -10,9 +10,17 @@ else if ($place == "sodexo") {
 <head>
 	<title>Lutakko</title>
 	<meta name="description" content="Hungry? Check out <?php echo $restaurant ?>!">
+	<style>
+		body {font-family:sans-serif; text-align: center;}
+		p {color:blue;}
+		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block;}
+		#below {font-size: 7;}
+	</style>
 </head>
+<body>
 <h1>View menus and reviews in LutakkoApp!</h1>
 <p>You are near <?php echo $restaurant ?>, want to check it out?
 	<br>Open with the app, or download the app here!</p>
 <a href="https://walkonen.fi/apps/dynamoapp/download/redirect.html?place=<?php echo $place?>">Lets go!</a>
 <p id="below">The button will prompt you to open the Lutakko App, or if not installed will redirect you to the Play Store</p>
+</body>
