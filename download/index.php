@@ -17,6 +17,7 @@ else if ($place == "sodexo") {
 		#below {font-size: 20;}
 		h1 {font-size: 62;}
 	</style>
+	
 </head>
 <body>
 <h1>View menus and reviews in LutakkoApp!</h1>

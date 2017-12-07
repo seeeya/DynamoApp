@@ -248,8 +248,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         markers.add(mFiilu);
         markers.add(mDynamo);
         markers.add(mBest);
-
-
     }
      public void moveCamera(boolean direction) {
         if (direction) {
