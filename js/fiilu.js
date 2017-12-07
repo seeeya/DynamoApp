@@ -5,6 +5,9 @@ $(document).ready(function() {
 	if($(".food-fiilu").length) {
 	getFood();
 	}
+	if($(".sodexo-today").length) {
+	getSodexo();
+	}
 });
 $( window ).load(function() {
   	orderList();
@@ -44,13 +47,15 @@ $( "h1" ).click(function() {
 $( "button" ).click(function() {$(".day").hide();	$(this).parent(".buttons").parent(".days").children(".food").children(".day."+$(this).html()).slideToggle(300);});
 
 function getFood() {
+
 	jQuery(function($) {
 		  $(".food-fiilu").rss("https://www.fazer.fi/api/location/menurss/current?pageId=29801&language=fi",
 		  {
 			entryTemplate:'<div class="days"><h1>{title}</h1><br/><div class="food">{body}</div></div>'
 		  })
 	});
-	getSodexo();
+	
+
 }
 function orderList() {
 	var buttons = false;
@@ -88,18 +93,17 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 	
 }
 function getSodexo() {
-$.getJSON( "https://walkonen.fi/sodexo.php", function( data ) {
-  var items = [];
-  $.each( data, function( key, val ) {
-    items.push( "<li id='" + key + "'>" + val + "</li>" );
+	console.log("Loading food!")
+	$.ajax({
+			url : "https://walkonen.fi/sodexo.php",
+			dataType : 'json',
+			success : function(result) {
+				var elem = result.courses.length - 1 ;
+				for(var num = 0;num < elem; num++) {
+				$(".sodexo-today").append("<div class='food'><h3 class='title'>"+result.courses[num].title_en+" ( "+result.courses[num].properties+" )</h3><p class='category'>Category: "+ result.courses[num].category +"</p><p class='price'>Price: "+ result.courses[num].price +" €</p></div>");
+				}
+			}
 	});
- 
-  $( "<ul/>", {
-    "class": "my-new-list",
-    html: items.join( "" )
-	}).appendTo( ".sodexo-food" );
-});
-
 }
 
 
