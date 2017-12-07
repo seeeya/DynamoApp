@@ -16,6 +16,12 @@ $( window ).load(function() {
 		// Animation complete.
 	  });
 	});
+	
+	$( ".sodexo-today h3" ).click(function() {
+		var c = $(this).attr("data-num");
+		$(".sodexo-today .otherdata"+c).slideToggle();
+	}
+	
 	$( "button" ).click(function() {
 		if(current !== "."+$(this).html()) {
 			
@@ -101,24 +107,22 @@ function getSodexo() {
 				var elem = result.courses.length - 1 ;
 				
 				for(var num = 0;num < elem; num++) {
-				var data = "<div class='food'><h3 class='title'>"+result.courses[num].title_en+"";
+				var data = "<div class='food'><h3 class='title' data-num='"+num+"'>"+result.courses[num].title_en+"";
 				if(result.courses[num].properties) {
 				data += "("+result.courses[num].properties+")";
 				}
+				if(result.courses[num].price) {
+				data += "<span class='price'>"+ result.courses[num].price +" €</span>";
+				}
 				data += "</h3>";
+				data+="<div class='otherdata"+num+"'>"
 				if(result.courses[num].category) {
 				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
 				}
 				if(result.courses[num].desc_en) {
 				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
-				
 				}
-				if(result.courses[num].price) {
-				data += "<p class='price'>Price: "+ result.courses[num].price +" €</p>";
-				}
-				
-				
-				data+= "</div>";
+				data+= "</div></div>";
 				
 			
 				
