@@ -93,8 +93,13 @@ function getSodexo() {
 			url : "https://walkonen.fi/sodexo.php",
 			dataType : 'json',
 			success : function(result) {
+				console.log(result.courses.length);
+				/*$(".sodexo-today").append("
+				<div class='food'>
 				
-				$(".sodexo-today").append(result);
+				
+				
+				</div>");*/
 
 			}
 	});
