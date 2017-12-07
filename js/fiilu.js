@@ -110,7 +110,7 @@ function getSodexo() {
 				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
 				}
 				if(result.courses[num].desc_en) {
-				data +=	"<p class='desc'>result.courses[num].desc_en</p>";
+				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
 				
 				}
 				if(result.courses[num].price) {
