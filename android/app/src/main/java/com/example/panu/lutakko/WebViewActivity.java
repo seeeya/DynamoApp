@@ -43,7 +43,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
         Intent intent = getIntent();
-        String url;
+        String url = "";
         if (intent.hasExtra("URL")) {
             url = intent.getStringExtra("URL");
         }
@@ -55,8 +55,6 @@ public class WebViewActivity extends AppCompatActivity {
                     break;
                 case "place=sodexo":
                     url = "https://walkonen.fi/apps/dynamoapp/?page=sodexo";
-                    break;
-                default: url = "https://walkonen.fi/apps/dynamoapp/?page=fiilu";
                     break;
             }
         }
