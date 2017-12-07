@@ -93,16 +93,9 @@ function getSodexo() {
 			url : "/sodexo.php",
 			dataType : 'json',
 			success : function(result) {
-				var JSONobject = result;
-				if (JSONobject.status == "OK") {
-					
-				
+
 				$(".sodexo-today").append(JSONobject);
-				
-				
-				} else {
-					console.log("Error!!")
-				}
+
 			}
 	});
 }
