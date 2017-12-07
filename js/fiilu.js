@@ -88,18 +88,22 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 	
 }
 function getSodexo() {
-$.getJSON( "https://walkonen.fi/sodexo.php", function( data ) {
-  var items = [];
-  $.each( data, function( key, val ) {
-    items.push( "<li id='" + key + "'>" + val + "</li>" );
+	$.ajax({
+			url : "/sodexo.php",
+			dataType : 'json',
+			success : function(result) {
+				var JSONobject = result;
+				if (JSONobject.status == "OK") {
+					
+				
+				$(".sodexo-today").append(result);
+				
+				
+				} else {
+					alert(error1);
+				}
+			}
 	});
- 
-  $( "<ul/>", {
-    "class": "my-new-list",
-    html: items.join( "" )
-	}).appendTo( ".sodexo-food" );
-});
-
 }
 
 
