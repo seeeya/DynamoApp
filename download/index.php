@@ -12,10 +12,12 @@ else if ($place == "sodexo") {
 	<meta name="description" content="Hungry? Check out <?php echo $restaurant ?>!">
 	<style>
 		body {font-family:sans-serif; text-align: center;}
-		p {color:blue;}
-		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block;}
-		#below {font-size: 8;}
+		p {color:blue; font-size: 40;}
+		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block; font-size: 40;}
+		#below {font-size: 20;}
+		h1 {font-size: 62;}
 	</style>
+	
 </head>
 <body>
 <h1>View menus and reviews in LutakkoApp!</h1>

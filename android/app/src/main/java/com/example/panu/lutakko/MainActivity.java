@@ -192,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setOnMyLocationButtonClickListener(mapHelper);
         googleMap.setOnMapClickListener(mapHelper);
         googleMap.setOnCameraIdleListener(mapHelper);
-        googleMap.setMyLocationEnabled(true);
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -249,8 +248,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         markers.add(mFiilu);
         markers.add(mDynamo);
         markers.add(mBest);
-
-
     }
      public void moveCamera(boolean direction) {
         if (direction) {
