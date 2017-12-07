@@ -14,7 +14,7 @@ else if ($place == "sodexo") {
 		body {font-family:sans-serif; text-align: center;}
 		p {color:blue;}
 		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block;}
-		#below {font-size: 7;}
+		#below {font-size: 8;}
 	</style>
 </head>
 <body>
