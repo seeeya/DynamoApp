@@ -126,12 +126,13 @@ align-items:center;
 font-size:12px;
 h3 {
 font-size:16px;
-cursor:pointer;
+//cursor:pointer;
 font-weight: bold;
 
 }
 .otherdata {
-display:none;
+//display:none;
+margin-bottom:10px;
 }
 .desc {
 font-weight: bold;
@@ -139,4 +140,8 @@ font-weight: bold;
 .price {
 text-decoration:underline;
 }
+p.category,h3.title {
+margin-bottom:0;
+}
+
 }

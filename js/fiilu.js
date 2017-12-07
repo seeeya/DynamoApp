@@ -16,12 +16,12 @@ $( window ).load(function() {
 		// Animation complete.
 	  });
 	});
-	
+	/*
 	$( ".sodexo-today h3" ).click(function() {
 		var c = $(this).attr("data-num");
 		$(".sodexo-today .otherdata"+c).slideToggle();
 	});
-	
+	*/
 	$( "button" ).click(function() {
 		if(current !== "."+$(this).html()) {
 			
@@ -105,7 +105,11 @@ function getSodexo() {
 			dataType : 'json',
 			success : function(result) {
 				var elem = result.courses.length - 1 ;
-				
+				if(elem = 0) {
+					$(".sodexo-today").append("<h2>We are not open today</h2>");
+					
+				}
+				else {
 				for(var num = 0;num < elem; num++) {
 				var data = "<div class='food'><h3 class='title' data-num='"+num+"'>"+result.courses[num].title_en+"";
 				if(result.courses[num].properties) {
@@ -123,12 +127,9 @@ function getSodexo() {
 				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
 				}
 				data+= "</div></div>";
-				
-			
-				
-				
 				$(".sodexo-today").append(data);
 				}
+			}
 			}
 	});
 }
