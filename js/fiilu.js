@@ -99,8 +99,31 @@ function getSodexo() {
 			dataType : 'json',
 			success : function(result) {
 				var elem = result.courses.length - 1 ;
+				
 				for(var num = 0;num < elem; num++) {
-				$(".sodexo-today").append("<div class='food'><h3 class='title'>"+result.courses[num].title_en+" ( "+result.courses[num].properties+" )</h3><p class='category'>Category: "+ result.courses[num].category +"</p><p class='price'>Price: "+ result.courses[num].price +" €</p></div>");
+				var data = "<div class='food'><h3 class='title'>"+result.courses[num].title_en+"";
+				if(result.courses[num].properties.length) {
+				data += "("+result.courses[num].properties+")";
+				}
+				data += "</h3>";
+				if(result.courses[num].category.length) {
+				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
+				}
+				if(result.courses[num].desc_en.length) {
+				data +=	"<p class='desc'>result.courses[num].desc_en</p>";
+				
+				}
+				if(result.courses[num].price.length) {
+				data += "<p class='price'>Price: "+ result.courses[num].price +" €</p>";
+				}
+				
+				
+				data+= "</div>";
+				
+			
+				
+				
+				$(".sodexo-today").append(data);
 				}
 			}
 	});
