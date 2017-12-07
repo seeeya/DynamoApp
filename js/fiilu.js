@@ -105,7 +105,7 @@ function getSodexo() {
 			dataType : 'json',
 			success : function(result) {
 				var elem = result.courses.length - 1 ;
-				if(elem = 0) {
+				if(elem == 0) {
 					$(".sodexo-today").append("<h2>We are not open today</h2>");
 					
 				}
