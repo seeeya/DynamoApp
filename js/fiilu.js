@@ -20,7 +20,7 @@ $( window ).load(function() {
 	$( ".sodexo-today h3" ).click(function() {
 		var c = $(this).attr("data-num");
 		$(".sodexo-today .otherdata"+c).slideToggle();
-	}
+	});
 	
 	$( "button" ).click(function() {
 		if(current !== "."+$(this).html()) {
