@@ -88,6 +88,7 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 	
 }
 function getSodexo() {
+	console.log("Loading food!")
 	$.ajax({
 			url : "/sodexo.php",
 			dataType : 'json',
@@ -96,11 +97,11 @@ function getSodexo() {
 				if (JSONobject.status == "OK") {
 					
 				
-				$(".sodexo-today").append(result);
+				$(".sodexo-today").append(JSONobject);
 				
 				
 				} else {
-					alert(error1);
+					console.log("Error!!")
 				}
 			}
 	});
