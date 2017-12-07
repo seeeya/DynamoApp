@@ -90,11 +90,11 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 function getSodexo() {
 	console.log("Loading food!")
 	$.ajax({
-			url : "/sodexo.php",
+			url : "https://walkonen.fi/sodexo.php",
 			dataType : 'json',
 			success : function(result) {
-
-				$(".sodexo-today").append(JSONobject);
+				
+				$(".sodexo-today").append(result);
 
 			}
 	});
