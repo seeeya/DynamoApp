@@ -102,18 +102,18 @@ function getSodexo() {
 				
 				for(var num = 0;num < elem; num++) {
 				var data = "<div class='food'><h3 class='title'>"+result.courses[num].title_en+"";
-				if(result.courses[num].properties.length) {
+				if(result.courses[num].properties) {
 				data += "("+result.courses[num].properties+")";
 				}
 				data += "</h3>";
-				if(result.courses[num].category.length) {
+				if(result.courses[num].category) {
 				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
 				}
-				if(result.courses[num].desc_en.length) {
+				if(result.courses[num].desc_en) {
 				data +=	"<p class='desc'>result.courses[num].desc_en</p>";
 				
 				}
-				if(result.courses[num].price.length) {
+				if(result.courses[num].price) {
 				data += "<p class='price'>Price: "+ result.courses[num].price +" €</p>";
 				}
 				
