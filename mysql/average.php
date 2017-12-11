@@ -1,5 +1,8 @@
 <?php
-$page = $_GET["page"];
+
+function getAverage() {
+	require_once("/home/phakala/mysql_conn.php");
+	$page = $_GET["page"];
 if ($page == "fiilu") {
 	$restaurant = "Ravintola Fiilu";
 }
@@ -9,8 +12,6 @@ else if ($page == "bittipannu") {
 else if ($page == "rajakatu") {
 	$restaurant = "JAMK Ravintola Radis";
 }
-function getAverage() {
-	require_once("/home/phakala/mysql_conn.php");
 	if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
