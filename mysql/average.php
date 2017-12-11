@@ -9,10 +9,7 @@ else if ($page == "bittipannu") {
 else if ($page == "rajakatu") {
 	$restaurant = "JAMK Ravintola Radis";
 }
-getAverage();
-
 function getAverage() {
-	require_once("/home/phakala/mysql_conn.php");
 	if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
