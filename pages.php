@@ -2,8 +2,8 @@
 $pages = array(
 "home" => "pages/frontpage.php",
 "fiilu" =>  "pages/fiilu.php",
-"sodexo" =>  "pages/sodexo.php"
-
+"bittipannu" =>  "pages/bitti.php"
+"rajakatu" =>  "pages/rajis.php"
 );
         
 $frontpage = "pages/frontpage.php";

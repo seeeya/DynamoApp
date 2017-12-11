@@ -5,9 +5,14 @@ $(document).ready(function() {
 	if($(".food-fiilu").length) {
 	getFood();
 	}
-	if($(".sodexo-today").length) {
-	getSodexo();
+	if($(".bitti-today").length) {
+	getSodexo("bitti");
 	}
+	if($(".rajis-today").length) {
+	getSodexo("rajis");
+	}
+	
+	
 });
 $( window ).load(function() {
   	orderList();
@@ -98,16 +103,24 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 	}
 	
 }
-function getSodexo() {
-	console.log("Loading food!")
+function getSodexo(var restaurant) {
+console.log("Loading food!");
+
+var urli = "https://walkonen.fi/sodexo.php?=r"+restaurant;
+
+
 	$.ajax({
-			url : "https://walkonen.fi/sodexo.php",
+			url : urli,
 			dataType : 'json',
 			success : function(result) {
 				var elem = result.courses.length - 1 ;
 				if(elem == 0) {
-					$(".sodexo-today").append("<h2>We are not open today</h2>");
-					
+					if(restaurant == "rajis") {
+						$(".rajis-today").append("<h2>We are not open today</h2>");
+					}
+					if(restaurant == "bitti") {
+					$(".bitti-today").append("<h2>We are not open today</h2>");
+					}
 				}
 				else {
 				for(var num = 0;num < elem; num++) {
@@ -127,10 +140,14 @@ function getSodexo() {
 				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
 				}
 				data+= "</div></div>";
-				$(".sodexo-today").append(data);
+				if(restaurant == "rajis") {
+				$(".rajis-today").append(data);
+				}
+				if(restaurant == "bitti") {
+					$(".bitti-today").append(data);	
 				}
 			}
-			}
+			}}
 	});
 }
 
