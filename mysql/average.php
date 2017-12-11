@@ -9,7 +9,7 @@ else if ($page == "bittipannu") {
 else if ($page == "rajakatu") {
 	$restaurant = "JAMK Ravintola Radis";
 }
-require_once("/home/phakala/mysql_conn.php");
+require_once("mysql/average.php");
 
 function getAverage() {
 	if (!$conn) {
