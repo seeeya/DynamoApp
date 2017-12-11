@@ -24,10 +24,10 @@ function getAverage() {
 		  $rounded = round($average);
 		  $extra = 5 - $rounded;
 		  for ($i=0;$i<$rounded;$i++) {
-			  echo "<span class='fa fa-star checked'></span>";
+			  echo "<span class='fa fa-star checked' style='color:#0733C3;'></span>";
 		  }
 		  for ($i=0;$i<$extra;$i++) {
-			  echo "<span class='fa fa-star'></span>";
+			  echo "<span class='fa fa-star' style='color:#e0e0d1;'></span>";
 		  }
         }
       }
