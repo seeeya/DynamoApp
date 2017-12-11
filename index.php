@@ -2,6 +2,7 @@
 <?php
 
 require_once("functions.php");
+require_once("mysql/average.php");
 $page = new sitesData();
 
 ?>

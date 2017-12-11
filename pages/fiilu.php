@@ -1,4 +1,4 @@
-<?php require_once("mysql/average.php");
+<?php
 getAverage();
 ?>
 <div class="food-fiilu"></div>
