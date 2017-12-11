@@ -2,8 +2,6 @@
 <?php
 
 require_once("functions.php");
-require_once("mysql/average.php");
-require_once("/home/phakala/mysql_conn.php");
 $page = new sitesData();
 
 ?>
