@@ -114,6 +114,12 @@ align-items:center;
 	a { 
 	  color: #fff;
 	  text-decoration: none; 
+	  width: 100%;
+min-width: 100%;
+display: block;
+padding-top: 5px;
+padding-bottom: 5px;
+border-bottom: 1px solid rgba(255,255,255,0.3);
 	}
 	a:hover,a:active, a:visited {
 	color:#fff;
