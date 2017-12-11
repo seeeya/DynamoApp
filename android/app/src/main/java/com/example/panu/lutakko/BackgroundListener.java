@@ -72,7 +72,7 @@ public class BackgroundListener extends BroadcastReceiver {
                         intent.putExtra("URL", pageurl);
                         break;
                     case "JAMK Ravintola Bittipannu":
-                        pageurl = "https://walkonen.fi/apps/dynamoapp/?page=sodexo";
+                        pageurl = "https://walkonen.fi/apps/dynamoapp/?page=bittipannu";
                         intent.putExtra("URL", pageurl);
                         break;
                 }
@@ -112,7 +112,6 @@ public class BackgroundListener extends BroadcastReceiver {
                     }
                 });
                 queue.add(stringRequest);
-                //insertMySQL(geofence.getName(), time, phoneid, context);
                 break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
@@ -158,7 +157,6 @@ public class BackgroundListener extends BroadcastReceiver {
                     }
                 });
                 queue1.add(stringRequest1);
-                //updateMySQL(geofence.getName(), time, phoneid, context, dwellint);
                 break;
         }
         }

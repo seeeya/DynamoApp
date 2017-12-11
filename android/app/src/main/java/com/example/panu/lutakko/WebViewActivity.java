@@ -1,6 +1,7 @@
 package com.example.panu.lutakko;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,23 +23,6 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
-                String message = "SSL Certificate error.";
-                switch (error.getPrimaryError()) {
-                    case SslError.SSL_UNTRUSTED:
-                        message = "The certificate authority is not trusted.";
-                        break;
-                    case SslError.SSL_EXPIRED:
-                        message = "The certificate has expired.";
-                        break;
-                    case SslError.SSL_IDMISMATCH:
-                        message = "The certificate Hostname mismatch.";
-                        break;
-                    case SslError.SSL_NOTYETVALID:
-                        message = "The certificate is not yet valid.";
-                        break;
-                }
-                message += "\"SSL Certificate Error\" Do you want to continue anyway?.. YES";
-
                 handler.proceed();
             }
         });
@@ -48,13 +32,20 @@ public class WebViewActivity extends AppCompatActivity {
             url = intent.getStringExtra("URL");
         }
         else {
-            String location = intent.getStringExtra("location");
-            switch (location) {
+            Uri data = intent.getData();
+            String query = data.getQuery();
+            switch (query) {
                 case "place=fiilu":
                     url = "https://walkonen.fi/apps/dynamoapp/?page=fiilu";
                     break;
+                case "place=bittipannu":
+                    url = "https://walkonen.fi/apps/dynamoapp/?page=bittipannu";
+                    break;
+                case "place=rajakatu":
+                    url = "https://walkonen.fi/apps/dynamoapp/?page=rajakatu";
+                    break;
                 case "place=sodexo":
-                    url = "https://walkonen.fi/apps/dynamoapp/?page=sodexo";
+                    url = "https://walkonen.fi/apps/dynamoapp/?page=rajakatu";
                     break;
             }
         }

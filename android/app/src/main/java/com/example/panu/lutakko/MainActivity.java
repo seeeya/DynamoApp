@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     List<Marker> markers = new ArrayList<Marker>();
     private Marker mDynamo;
     private Marker mFiilu;
-    private Marker mBest;
+    private Marker mRadis;
     private int arrayindex = 0;
     private static final LatLng Dynamo = new LatLng(62.241704, 25.759495);
     private static final LatLng Fiilu = new LatLng(62.240799, 25.757682);
-    private static final LatLng Best = new LatLng(62.241710, 25.761445);
+    private static final LatLng Radis = new LatLng(62.251267, 25.742995);
     private GoogleMap gMap;
     private String pageurl = "http://walkonen.fi/apps/dynamoapp/";
 
 
 
-    private static final String TAG = "Lutakko Lunch";
+    private static final String TAG = "LunchApp";
     public static final String AUTH = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImlzcyI6ImRiMDRhNjMyLWM2OTgtNDYwMC04ZDc4LWM0YTczYTFkZGI3MCIsInR5cGUiOiJhcHBsaWNhdGlvbiIsImFwcGxpY2F0aW9uX2lkIjoiMjkwM2JmNmEtMzA5NS00MDcxLTlkODktM2MzOTU0MjMwNDViIn0.2jU0sheug_ge8WiwA10fHIZViaWlAwnBzsRGGHhTSBA"; // TODO: Replace with your own!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 }).build();
         LatLng lutakko = new LatLng(62.241137, 25.759345);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lutakko, 15));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lutakko, 13));
 
         googleMap.setOnMyLocationButtonClickListener(mapHelper);
         googleMap.setOnMapClickListener(mapHelper);
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (marker.getTitle()) {
                     case "JAMK Ravintola Bittipannu": arrayindex = 1;
                     break;
-                    case "Pizzeria Best": arrayindex = 2;
+                    case "JAMK Ravintola Radis": arrayindex = 2;
                     break;
                     case "Ravintola Fiilu": arrayindex = 0;
                     break;
@@ -219,11 +219,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         intent.putExtra("URL", pageurl);
                         break;
                     case "JAMK Ravintola Bittipannu":
-                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=sodexo");
+                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=bittipannu");
                         intent.putExtra("URL", pageurl);
                         break;
-                    case "Pizzeria Best":
-                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=sodexo");
+                    case "JAMK Ravintola Radis":
+                        pageurl = new String("https://walkonen.fi/apps/dynamoapp/?page=rajakatu");
                         intent.putExtra("URL", pageurl);
                         break;
                 }
@@ -242,25 +242,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mFiilu = googleMap.addMarker(new MarkerOptions()
                 .position(Fiilu)
                 .title("Ravintola Fiilu"));
-        mBest = googleMap.addMarker(new MarkerOptions()
-                .position(Best)
-                .title("Pizzeria Best"));
+        mRadis = googleMap.addMarker(new MarkerOptions()
+                .position(Radis)
+                .title("JAMK Ravintola Radis"));
         markers.add(mFiilu);
         markers.add(mDynamo);
-        markers.add(mBest);
+        markers.add(mRadis);
     }
      public void moveCamera(boolean direction) {
         if (direction) {
             if (arrayindex == 2) arrayindex = -1;
             arrayindex++;
-            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
+            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 13));
             markers.get(arrayindex).setSnippet("Click to get menus, details and more!");
             markers.get(arrayindex).showInfoWindow();
         }
         else {
             if (arrayindex == 0) arrayindex = 3;
             arrayindex--;
-            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 16));
+            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(markers.get(arrayindex).getPosition(), 13));
             markers.get(arrayindex).setSnippet("Click to get menus, details and more!");
             markers.get(arrayindex).showInfoWindow();
         }

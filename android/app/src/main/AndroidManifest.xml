@@ -31,9 +31,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".WebViewActivity" />
-        <activity android:name=".BackgroundListener" />
-        <activity android:name=".DeepLinkHandler">
+        <activity android:name=".WebViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -44,6 +42,10 @@
                     android:host="place"
                     android:pathPrefix="/"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".BackgroundListener" />
+        <activity android:name=".DeepLinkHandler">
+
         </activity>
     </application>
 
