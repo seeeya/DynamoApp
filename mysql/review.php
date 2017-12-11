@@ -12,6 +12,7 @@ else if ($place == "rajakatu") {
 }
 ?>
 <head>
+	<meta charset="utf-8">
 	<title>Lutakko</title>
 	<meta name="description" content="Hungry? Check out <?php echo $restaurant ?>!">
 	<style>
@@ -20,15 +21,17 @@ else if ($place == "rajakatu") {
 		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block; font-size: 40;}
 		#below {font-size: 20;}
 		h1 {font-size: 62;}
-		span {font-size: 60; color:blue; user-select: none; -moz-user-select: none; padding: 5%;}
+		span {font-size: 60; color:#e0e0d1; user-select: none; -moz-user-select: none; padding: 5%;}
 		#button {width: 100%; background-color: blue; color: white; padding: 3%; font-size: 40;}
+		.checked {color: blue;}
 	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <h1>How did you like <?php echo $restaurant ?>?</h1>
 <p>Let us and everyone else know your experience! Leave a rating!</p>
 <div class="rating">
-<span id="1">?</span><span id="2">?</span><span id="3">?</span><span id="4">?</span><span id="5">?</span>
+<span id="1" class="fa fa-star fa-3x"></span><span id="2" class="fa fa-star fa-3x"></span><span id="3" class="fa fa-star fa-3x"></span><span id="4" class="fa fa-star fa-3x"></span><span id="5" class="fa fa-star fa-3x"></span>
 <form method="post">
 <input type="hidden" name="rating" value="" id="rating">
 <input type="submit" value="Submit review" name="submitbutton" id="button">
@@ -40,11 +43,11 @@ else if ($place == "rajakatu") {
     $("span").click(function(e){
 		$( "span" ).each(function( index, element ) {
 			$(element).attr('id', index + 1);
-			$(element).text("?")
+			$(element).attr('class', 'fa fa-star fa-3x');
 		});
 		$(this).attr('id', 'stop');
 		$( "span" ).each(function( index, element ) {
-			$( element ).text("?")
+			$( element ).attr('class', 'fa fa-star checked fa-3x');
 			if ( $( this ).is( "#stop" ) ) {
 				$("#rating").val(index + 1);
 				return false;
