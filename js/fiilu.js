@@ -103,7 +103,7 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 	}
 	
 }
-function getSodexo(var restaurant) {
+function getSodexo(restaurant) {
 console.log("Loading food!");
 
 var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
