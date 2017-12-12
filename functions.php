@@ -9,7 +9,7 @@ class sitesData {
 	   
 	   for($i = 0 ; $i < $arrayLength ; $i++) {
 	   if ($i == 0) {
-		   echo "<li><a href='".$array[$i]".'>" .ucfirst($array[$i]). "</a></li>";
+		   echo "<li><a href='".$array[$i]."'>" .ucfirst($array[$i]). "</a></li>";
 	   } 
 	   else {
 		   echo "<li><a href='?page=".$array[$i]."'>" .ucfirst($array[$i]). "</a></li>";
