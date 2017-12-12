@@ -69,11 +69,12 @@ public class BackgroundListener extends BroadcastReceiver {
                 switch (geofence.getName()) {
                     case "Ravintola Fiilu":
                         pageurl = "https://walkonen.fi/apps/dynamoapp/?page=fiilu";
-                        intent.putExtra("URL", pageurl);
                         break;
                     case "JAMK Ravintola Bittipannu":
                         pageurl = "https://walkonen.fi/apps/dynamoapp/?page=bittipannu";
-                        intent.putExtra("URL", pageurl);
+                        break;
+                    case "JAMK Ravintola Radis":
+                        pageurl = "https://walkonen.fi/apps/dynamoapp/?page=rajakatu";
                         break;
                 }
                 Intent resultIntent = new Intent(context, WebViewActivity.class);
@@ -114,8 +115,22 @@ public class BackgroundListener extends BroadcastReceiver {
                 queue.add(stringRequest);
                 break;
             case ProximiioAPI.ACTION_GEOFENCE_EXIT:
+                String reviewurl;
                 long dwellTime = intent.getLongExtra(ProximiioAPI.EXTRA_DWELL_TIME, 0);
                 geofence = intent.getParcelableExtra(ProximiioAPI.EXTRA_GEOFENCE);
+                switch (geofence.getName()) {
+                    case "Ravintola Fiilu":
+                        reviewurl = "https://walkonen.fi/apps/dynamoapp/mysql/review.php?place=fiilu";
+                        break;
+                    case "JAMK Ravintola Bittipannu":
+                        reviewurl = "https://walkonen.fi/apps/dynamoapp/mysql/review.php?place=bittipannu";
+                        break;
+                    case "JAMK Ravintola Radis":
+                        reviewurl = "https://walkonen.fi/apps/dynamoapp/mysql/review.php?place=rajakatu";
+                        break;
+                    default: reviewurl = "https://walkonen.fi/apps/dynamoapp/mysql/review.php?place=rajakatu";
+                        break;
+                }
                 String dwellminutes = "";
                 double dwell = dwellTime / 60;
                 int dwellint = (int) Math.round(dwell);
@@ -125,6 +140,9 @@ public class BackgroundListener extends BroadcastReceiver {
                     text = "Tap here to give feedback!";
                 }
                 else text = "You spent " + dwellminutes + " minutes here! Tap here to give feedback!";
+                Intent resultIntent2 = new Intent(context, WebViewActivity.class);
+                resultIntent2.putExtra("reviewURL", reviewurl);
+                PendingIntent resultPendingIntent2 = PendingIntent.getActivity(context, 0, resultIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
                 NotificationCompat.Builder mBuilder2 =
                         new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.notification)
@@ -132,6 +150,7 @@ public class BackgroundListener extends BroadcastReceiver {
                                 .setContentText(text);
                 NotificationManager notifyManager2 =
                         (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                mBuilder2.setContentIntent(resultPendingIntent2);
                 notifyManager2.notify(1, mBuilder2.build());
                 Date dexit = new Date();
                 String exittime = ft.format(dexit).toString();

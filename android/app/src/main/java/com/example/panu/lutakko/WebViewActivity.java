@@ -31,6 +31,9 @@ public class WebViewActivity extends AppCompatActivity {
         if (intent.hasExtra("URL")) {
             url = intent.getStringExtra("URL");
         }
+        else if (intent.hasExtra("reviewURL")) {
+            url = intent.getStringExtra("reviewURL");
+        }
         else {
             Uri data = intent.getData();
             String query = data.getQuery();
