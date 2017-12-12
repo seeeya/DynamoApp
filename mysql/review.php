@@ -17,12 +17,11 @@ else if ($place == "rajakatu") {
 	<meta name="description" content="Hungry? Check out <?php echo $restaurant ?>!">
 	<style>
 		body {font-family:sans-serif; text-align: center;}
-		p {color:blue; font-size: 40;}
+		p {color:blue; font-size: 20;}
 		a {padding: 5%; background-color: blue; color: white; text-align:center;display:block; font-size: 40;}
-		#below {font-size: 20;}
-		h1 {font-size: 62;}
-		span {font-size: 60; color:#e0e0d1; user-select: none; -moz-user-select: none; padding: 5%;}
-		#button {width: 100%; background-color: blue; color: white; padding: 3%; font-size: 40;}
+		h1 {font-size: 30;}
+		span {font-size: 40; color:#e0e0d1; user-select: none; -moz-user-select: none; padding: 5%;}
+		#button {width: 100%; background-color: blue; color: white; padding: 3%; font-size: 20;}
 		.checked {color: blue;}
 	</style>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
