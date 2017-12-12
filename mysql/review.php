@@ -30,7 +30,7 @@ else if ($place == "rajakatu") {
 <h1>How did you like <?php echo $restaurant ?>?</h1>
 <p>Let us and everyone else know your experience! Leave a rating!</p>
 <div class="rating">
-<span id="1" class="fa fa-star fa-3x"></span><span id="2" class="fa fa-star fa-3x"></span><span id="3" class="fa fa-star fa-3x"></span><span id="4" class="fa fa-star fa-3x"></span><span id="5" class="fa fa-star fa-3x"></span>
+<span id="1" class="fa fa-star fa-2x"></span><span id="2" class="fa fa-star fa-2x"></span><span id="3" class="fa fa-star fa-2x"></span><span id="4" class="fa fa-star fa-2x"></span><span id="5" class="fa fa-star fa-2x"></span>
 <form method="post">
 <input type="hidden" name="rating" value="" id="rating">
 <input type="submit" value="Submit review" name="submitbutton" id="button">
@@ -42,11 +42,11 @@ else if ($place == "rajakatu") {
     $("span").click(function(e){
 		$( "span" ).each(function( index, element ) {
 			$(element).attr('id', index + 1);
-			$(element).attr('class', 'fa fa-star fa-3x');
+			$(element).attr('class', 'fa fa-star fa-2x');
 		});
 		$(this).attr('id', 'stop');
 		$( "span" ).each(function( index, element ) {
-			$( element ).attr('class', 'fa fa-star checked fa-3x');
+			$( element ).attr('class', 'fa fa-star checked fa-2x');
 			if ( $( this ).is( "#stop" ) ) {
 				$("#rating").val(index + 1);
 				return false;
