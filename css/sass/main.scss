@@ -27,6 +27,7 @@ font-weight: bold !important;
 	h2 {
 	font-size: 16px;
 	font-weight: bold;
+	font-weight: bold;
 	cursor:pointer;
 	   -webkit-transition: all 2s ease-out;
   -moz-transition: all 2s ease-out;
@@ -53,6 +54,15 @@ body {
   }
 
 }
+
+.content .page-container {
+
+max-width: 100%;
+width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+
 .content {
 width:1280px;
 max-width:100%;
