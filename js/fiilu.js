@@ -71,9 +71,9 @@ function getFood() {
 function orderList() {
 	var buttons = false;
 	$("br").remove();
-	$(".food-fiilu").prepend($(".days table"));
-	$(".food-fiilu table").addClass("table-bordered");
-	$(".food-fiilu table:nth-child(2)").remove();
+	//$(".food-fiilu").prepend($(".days table"));
+	//$(".food-fiilu table").addClass("table-bordered");
+	//$(".food-fiilu table:nth-child(2)").remove();
 	$(".days table").remove();
 	$("p strong").parent("p").hide();
 	$('.food-fiilu div h2').each(function(){
@@ -87,21 +87,6 @@ $set.wrapAll('<div class="day ' + $(this).html().replace(/&nbsp;/gi,'') +'" />')
 });
 
 	$("button").each(function() { $(this).html($(this).html().replace(/&nbsp;/gi,''));});
-	var HeightDiv = $("div").height();
-    var HeightTable = $("table").height();
-    if (HeightTable > HeightDiv) {
-        var FontSizeTable = parseInt($("table").css("font-size"), 10);
-        while (HeightTable > HeightDiv && FontSizeTable > 5) {
-            FontSizeTable--;
-            $("table").css("font-size", FontSizeTable);
-            HeightTable = $("table").height();
-        }
-    }
-	
-	if(window.innerWidth < 500) {
-
-	}
-	
 }
 function getSodexo(restaurant) {
 console.log("Loading food!");
