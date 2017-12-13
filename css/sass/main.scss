@@ -19,14 +19,14 @@ border-radius:100%;
 	}
 }
 h1 {
-font-size:18px;
+font-size:18px !important;
 //cursor:pointer;
-font-weight: bold;
+font-weight: bold !important;
 }
 .food {
 	h2 {
 	font-size: 16px;
-font-weight: bold;
+	font-weight: bold;
 	cursor:pointer;
 	   -webkit-transition: all 2s ease-out;
   -moz-transition: all 2s ease-out;
@@ -69,9 +69,6 @@ margin:0 auto;
 display:-ms-flexbox;
 display:-webkit-flex;
 display:flex;
--ms-flex-wrap:wrap;
--webkit-flex-wrap:wrap;
-flex-wrap:wrap;
 -ms-flex-justify:space-around;
 -webkit-justify-content:space-around;
 justify-content:space-around;
@@ -92,15 +89,22 @@ table {
 font-size:13px !important;
 }
 .content .buttons button {
-width:150px;
+width: calc(300px/5);
+font-size: 11px;
+padding-right: 0;
+padding-left: 0;
 }
 .content  .buttons {
-flex-direction:column;
-align-items:center;
--webkit-flex-direction:column;
--webkit-align-items:center;
--ms-flex-pack:center;
--ms-flex-direction:column;
+flex-direction: column;
+align-items: center;
+-webkit-flex-direction: row;
+-webkit-align-items: center;
+-ms-flex-pack: center;
+
+-ms-flex-direction: column;
+justify-content: space-between;
+-ms-flex-justify:space-between;
+-webkit-justify-content:space-between;
 }
 }
 .menu {
