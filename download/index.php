@@ -3,8 +3,11 @@ $place = $_GET["place"];
 if ($place == "fiilu") {
 	$restaurant = "Ravintola Fiilu";
 }
-else if ($place == "sodexo") {
+else if ($place == "bittipannu") {
 	$restaurant = "JAMK Ravintola Bittipannu";
+}
+else if ($place == "rajakatu") {
+	$restaurant = "JAMK Ravintola Radis";
 }
 ?>
 <head>
