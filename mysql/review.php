@@ -28,7 +28,7 @@ else if ($place == "rajakatu") {
 </head>
 <body>
 <h1>How did you like <?php echo $restaurant ?>?</h1>
-<p>Let us and everyone else know your experience! Leave a rating!</p>
+<p>Let us and everyone else know your experience!</p>
 <div class="rating">
 <span id="1" class="fa fa-star fa-2x"></span><span id="2" class="fa fa-star fa-2x"></span><span id="3" class="fa fa-star fa-2x"></span><span id="4" class="fa fa-star fa-2x"></span><span id="5" class="fa fa-star fa-2x"></span>
 <form method="post">

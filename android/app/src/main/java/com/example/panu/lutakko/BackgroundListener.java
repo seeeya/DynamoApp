@@ -17,33 +17,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.net.URLEncoder;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import io.proximi.proximiiolibrary.ProximiioAPI;
 import io.proximi.proximiiolibrary.ProximiioGeofence;
@@ -77,6 +61,7 @@ public class BackgroundListener extends BroadcastReceiver {
                         pageurl = "https://walkonen.fi/apps/dynamoapp/?page=rajakatu";
                         break;
                 }
+                //notification with intent
                 Intent resultIntent = new Intent(context, WebViewActivity.class);
                 resultIntent.putExtra("URL", pageurl);
                 PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -98,6 +83,7 @@ public class BackgroundListener extends BroadcastReceiver {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                //calls a php script which makes database insert
                 String url = "https://walkonen.fi/apps/dynamoapp/mysql/insert.php?place="+url_name+"&time="+time+"&id="+phoneid+"";
                 RequestQueue queue = Volley.newRequestQueue(context);
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
