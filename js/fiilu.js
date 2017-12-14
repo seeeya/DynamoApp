@@ -95,25 +95,33 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 
 
 	$.ajax({
-			url : urli,
-			dataType : 'json',
-			success : function(result) {
-				var elem = result.courses.length - 1 ;
-				if(elem == 0) {
-					if(restaurant == "rajis") {
-						$(".rajis-today").append("<h2>We are not open today</h2>");
-					}
-					if(restaurant == "bitti") {
+		url: urli,
+		dataType: 'json',
+		success: function (result) {
+			var elem = result.courses.length - 1;
+			if (elem == 0) {
+				if (restaurant == "rajis") {
+					$(".rajis-today").append("<h2>We are not open today</h2>");
+				}
+				if (restaurant == "bitti") {
 					$(".bitti-today").append("<h2>We are not open today</h2>");
+				}
+			}
+			else {
+				for (var num = 0; num < elem; num++) {
+					data += "<div class='otherdata" + num + " otherdata'>";
+					if (result.courses[num].category) {
+						data += "<p class='category'>Category: " + result.courses[num].category + "</p>";
 					}
-				}
-				else {
-				for(var num = 0;num < elem; num++) {
-				var data = "<div class='food'><h3 class='title' data-num='"+num+"'>"+result.courses[num].title_en+"";
-				if(result.courses[num].properties) {
-				data += "("+result.courses[num].properties+")";
-				}
-				data += "</h3>";
+					if (result.courses[num].desc_en) {
+						data += "<p class='desc'>" + result.courses[num].desc_en + "</p>";
+					}
+					data += "</div>";
+					var data = "<div class='food'><h3 class='title' data-num='" + num + "'>" + result.courses[num].title_en + "";
+					if (result.courses[num].properties) {
+						data += "(" + result.courses[num].properties + ")";
+					}
+					data += "</h3>";
 					if (result.courses[num].price) {
 						var split_hinta = result.courses[num].price.split("/");
 						if (split_hinta.length == 1) {
@@ -127,22 +135,17 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 							data += " </div>";
 						}
 					}
-				data+="<div class='otherdata"+num+" otherdata'>";
-				if(result.courses[num].category) {
-				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
-				}
-				if(result.courses[num].desc_en) {
-				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
-				}
-				data+= "</div></div>";
-				if(restaurant == "rajis") {
-				$(".rajis-today").append(data);
-				}
-				if(restaurant == "bitti") {
-					$(".bitti-today").append(data);	
+
+					data += "</div>";
+					if (restaurant == "rajis") {
+						$(".rajis-today").append(data);
+					}
+					if (restaurant == "bitti") {
+						$(".bitti-today").append(data);
+					}
 				}
 			}
-			}}
+		}
 	});
 }
 
