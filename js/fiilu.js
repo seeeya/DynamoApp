@@ -108,29 +108,39 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 					}
 				}
 				else {
-				for(var num = 0;num < elem; num++) {
-				var data = "<div class='food'><h3 class='title' data-num='"+num+"'>"+result.courses[num].title_en+"";
-				if(result.courses[num].properties) {
-				data += "("+result.courses[num].properties+")";
-				}
-				data += "</h3>";
-				if(result.courses[num].price) {
-				data += " <div class='price'>"+ result.courses[num].price +" €</div>";
-				}
-				data+="<div class='otherdata"+num+" otherdata'>";
-				if(result.courses[num].category) {
-				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
-				}
-				if(result.courses[num].desc_en) {
-				data +=	"<p class='desc'>"+ result.courses[num].desc_en + "</p>";
-				}
-				data+= "</div></div>";
-				if(restaurant == "rajis") {
-				$(".rajis-today").append(data);
-				}
-				if(restaurant == "bitti") {
-					$(".bitti-today").append(data);	
-				}
+					for (var num = 0; num < elem; num++) {
+						var data = "<div class='food'><h3 class='title' data-num='" + num + "'>" + result.courses[num].title_en + "";
+						if (result.courses[num].properties) {
+							data += "(" + result.courses[num].properties + ")";
+						}
+						data += "</h3>";
+						if (result.courses[num].price) {
+							var split_hinta = result.courses[num].price.split("/");
+							if (split_hinta.length == 1) {
+								data += " <div class='price'>" + result.courses[num].price + " €</div>";
+							}
+							else {
+								data += " <div class='price'>"
+								data += " <span class='opiskelijahinta'> " + split_hinta[0] + " / </span>"
+								data += " <span class='hlokuntahinta'>" + split_hinta[1] + " / </span>"
+								data += " <span class='kallishinta'>" + split_hinta[2] + " €</span>"
+								data += " </div>";
+							}
+						}
+						data += "<div class='otherdata" + num + " otherdata'>";
+						if (result.courses[num].category) {
+							data += "<p class='category'>Category: " + result.courses[num].category + "</p>";
+						}
+						if (result.courses[num].desc_en) {
+							data += "<p class='desc'>" + result.courses[num].desc_en + "</p>";
+						}
+						data += "</div></div>";
+						if (restaurant == "rajis") {
+							$(".rajis-today").append(data);
+						}
+						if (restaurant == "bitti") {
+							$(".bitti-today").append(data);
+						}
 			}
 			}}
 	});

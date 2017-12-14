@@ -60,7 +60,7 @@ width: 800px !important;
 margin-left: auto !important;
 margin-right: auto !important;
 h2 {
-	Color: #FFCE09;
+	Color: #69ACE5;
 }
 }
 
@@ -178,6 +178,7 @@ font-weight: bold;
 }
 .price {
 text-decoration:underline;
+font-weight: bold;
 }
 p.category,h3.title {
 margin-bottom:0;
@@ -189,5 +190,14 @@ color: #e0e0d1;
 color: #0733C3;
 }
 
+.opiskelijahinta{
+	color: $opiskelija_colour; 
+  }
+  .hlokuntahinta{
+	color: $hlokuntavari;
+  }
+  .kallishinta{
+	color:$kallisvari;
+  }
 
 }
