@@ -113,10 +113,10 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 				if(result.courses[num].properties) {
 				data += "("+result.courses[num].properties+")";
 				}
-				if(result.courses[num].price) {
-				data += " <span class='price'>"+ result.courses[num].price +" €</span>";
-				}
 				data += "</h3>";
+				if(result.courses[num].price) {
+				data += " <div class='price'>"+ result.courses[num].price +" €</div>";
+				}
 				data+="<div class='otherdata"+num+" otherdata'>";
 				if(result.courses[num].category) {
 				data += "<p class='category'>Category: "+ result.courses[num].category +"</p>";
