@@ -109,6 +109,7 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 			}
 			else {
 				for (var num = 0; num < elem; num++) {
+					var data = "<div class='food'>"
 					data += "<div class='otherdata" + num + " otherdata'>";
 					if (result.courses[num].category) {
 						data += "<p class='category'>Category: " + result.courses[num].category + "</p>";
@@ -117,7 +118,7 @@ var urli = "https://walkonen.fi/sodexo.php?r="+restaurant;
 						data += "<p class='desc'>" + result.courses[num].desc_en + "</p>";
 					}
 					data += "</div>";
-					var data = "<div class='food'><h3 class='title' data-num='" + num + "'>" + result.courses[num].title_en + "";
+					data += "<h3 class='title' data-num='" + num + "'>" + result.courses[num].title_en + "";
 					if (result.courses[num].properties) {
 						data += "(" + result.courses[num].properties + ")";
 					}
